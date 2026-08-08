@@ -5,7 +5,7 @@ description: When the user says "Go Pikachu", automatically stage all changes, c
 
 # ⚡ Go Pikachu — Commit & Push to GitHub
 
-When the user says **"Go Pikachu"** (case-insensitive), execute the following Git workflow immediately without asking for confirmation.
+When the user says **"Go Pikachu"** (case-insensitive), execute the following Git workflow. Ask for branch confirmation before pushing.
 
 ## Steps
 
@@ -23,13 +23,18 @@ When the user says **"Go Pikachu"** (case-insensitive), execute the following Gi
    - 🗑️ for deletions
    - 🔀 for mixed changes
 4. **Commit**: Run `git commit -m "<generated message>"`.
-5. **Push**: Run `git push` to push to the remote (typically `origin main`).
-6. **Report**: Confirm success with a summary of what was committed and pushed.
+5. **Select push target branch**: Ask the user which branch to push to:
+   - Option A: Push to an existing remote branch (list available branches)
+   - Option B: Create and push to a new feature branch
+   - User confirms their choice before proceeding
+6. **Push**: Run `git push` to the selected branch with user approval.
+7. **Report**: Confirm success with a summary of what was committed and pushed.
 
 ## Rules
 
 - Do NOT ask the user for a commit message — generate one automatically.
-- Do NOT ask for confirmation — just do it.
+- DO ask user to select push target branch before pushing (existing remote or new feature branch).
+- Require user approval before executing the push.
 - If there are no changes to commit, inform the user: "Nothing to commit — working tree is clean! ⚡"
 - If push fails (e.g., authentication issue, remote rejection), report the error clearly and suggest fixes.
 - Always run commands in the workspace root directory.
