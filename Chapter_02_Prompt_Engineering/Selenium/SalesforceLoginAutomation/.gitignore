@@ -1,0 +1,31 @@
+# Selenium C# / .NET Build Artifacts
+bin/
+obj/
+*.dll
+*.pdb
+*.exe
+*.cache
+*.user
+*.suo
+*.nupkg
+
+# NuGet
+packages/
+*.nuget.props
+*.nuget.targets
+*.nuget.g.props
+*.nuget.g.targets
+project.assets.json
+project.nuget.cache
+*.dgspec.json
+
+# IDE
+.vs/
+*.csproj.user
+
+# Test Results
+TestResults/
+allure-results/
+allure-report/
+*.trx
+*.log
