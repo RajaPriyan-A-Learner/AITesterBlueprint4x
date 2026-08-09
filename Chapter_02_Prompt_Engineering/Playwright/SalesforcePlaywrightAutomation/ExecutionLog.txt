@@ -1,0 +1,63 @@
+[2026-08-09T15:32:19.271Z] - Starting Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:19.296Z] - Starting Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:19.298Z] - Starting Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:19.310Z] - Starting Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:19.343Z] - Starting Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:19.350Z] - Starting Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:19.775Z] - Initializing LoginPage context for test.
+[2026-08-09T15:32:19.775Z] - Initializing LoginPage context for test.
+[2026-08-09T15:32:21.176Z] - Initializing LoginPage context for test.
+[2026-08-09T15:32:21.319Z] - Navigated to https://login.salesforce.com/?locale=in
+[2026-08-09T15:32:21.319Z] - Navigated to https://login.salesforce.com/?locale=in
+[2026-08-09T15:32:21.391Z] - Entered username.
+[2026-08-09T15:32:21.394Z] - Entered username.
+[2026-08-09T15:32:21.430Z] - Entered password.
+[2026-08-09T15:32:21.433Z] - Entered password.
+[2026-08-09T15:32:21.905Z] - Initializing LoginPage context for test.
+[2026-08-09T15:32:22.242Z] - Initializing LoginPage context for test.
+[2026-08-09T15:32:22.242Z] - Initializing LoginPage context for test.
+[2026-08-09T15:32:22.386Z] - Clicked login button.
+[2026-08-09T15:32:22.967Z] - Clicked login button.
+[2026-08-09T15:32:24.492Z] - Error message retrieved: Error: Please check your username and password. If you still can't log in, contact your Salesforce administrator.
+[2026-08-09T15:32:24.500Z] - Finished test execution.
+[2026-08-09T15:32:24.503Z] - Navigated to https://login.salesforce.com/?locale=in
+[2026-08-09T15:32:24.567Z] - Entered username.
+[2026-08-09T15:32:24.589Z] - Entered password.
+[2026-08-09T15:32:24.674Z] - Completed Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:25.029Z] - Clicked login button.
+[2026-08-09T15:32:25.076Z] - Error message retrieved: Error: Please check your username and password. If you still can't log in, contact your Salesforce administrator.
+[2026-08-09T15:32:25.081Z] - Finished test execution.
+[2026-08-09T15:32:25.161Z] - Completed Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:25.752Z] - Navigated to https://login.salesforce.com/?locale=in
+[2026-08-09T15:32:25.807Z] - Entered username.
+[2026-08-09T15:32:25.824Z] - Entered password.
+[2026-08-09T15:32:26.164Z] - Clicked login button.
+[2026-08-09T15:32:26.434Z] - Navigated to https://login.salesforce.com/?locale=in
+[2026-08-09T15:32:26.435Z] - Navigated to https://login.salesforce.com/?locale=in
+[2026-08-09T15:32:26.486Z] - Entered username.
+[2026-08-09T15:32:26.487Z] - Entered username.
+[2026-08-09T15:32:26.505Z] - Entered password.
+[2026-08-09T15:32:26.507Z] - Entered password.
+[2026-08-09T15:32:26.792Z] - Clicked login button.
+[2026-08-09T15:32:26.796Z] - Clicked login button.
+[2026-08-09T15:32:26.833Z] - Error message retrieved: Error: Please check your username and password. If you still can't log in, contact your Salesforce administrator.
+[2026-08-09T15:32:26.839Z] - Finished test execution.
+[2026-08-09T15:32:26.938Z] - Completed Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:32.402Z] - Login successful verification failed (Timeout).
+[2026-08-09T15:32:32.406Z] - Test Failed (Valid Login): [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+Received: [31mfalse[39m
+[2026-08-09T15:32:32.688Z] - Finished test execution.
+[2026-08-09T15:32:32.859Z] - Completed Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:36.178Z] - Login successful verification failed (Timeout).
+[2026-08-09T15:32:36.187Z] - Test Failed (Valid Login): [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+Received: [31mfalse[39m
+[2026-08-09T15:32:36.300Z] - Finished test execution.
+[2026-08-09T15:32:36.433Z] - Completed Test Suite: Salesforce Login Tests
+[2026-08-09T15:32:36.805Z] - Login successful verification failed (Timeout).
+[2026-08-09T15:32:36.811Z] - Test Failed (Valid Login): [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+Received: [31mfalse[39m
+[2026-08-09T15:32:36.860Z] - Finished test execution.
+[2026-08-09T15:32:36.929Z] - Completed Test Suite: Salesforce Login Tests
