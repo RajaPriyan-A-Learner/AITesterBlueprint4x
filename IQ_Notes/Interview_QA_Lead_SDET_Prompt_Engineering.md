@@ -480,3 +480,122 @@ The rule of thumb: if two templates share more than 70% of their constraints, me
 - No two examples use the same domain to demonstrate the templates' versatility.
 - API examples include real-looking endpoint definitions, status codes, and JSON schemas — not "TODO" placeholders.
 - Bug examples use realistic evidence (NullReferenceException logs, Safari-specific JS errors, iOS crash reports).
+
+---
+
+## Section G: Applied AI Tooling — Local Test Case Generator (Chapter 03)
+
+---
+
+**Q31: How would you architect a local-first AI test case generator that integrates with Jira, and what design decisions are non-negotiable?**
+
+**A:** The architecture has four decoupled modules, each with a single responsibility:
+
+| Module | Responsibility |
+|--------|---------------|
+| `jira_client.py` | Jira REST API v2 fetch — returns `{summary, description, acceptance_criteria}` |
+| `config_store.py` | Credential persistence with a 3-layer priority chain |
+| `llm_client.py` | Streaming LLM calls — Ollama primary, Groq fallback |
+| `app.py` | Streamlit UI orchestration only — no business logic |
+
+Non-negotiable design decisions:
+1. **Local-first**: Ollama runs on the tester's machine — ticket data never leaves the network. Privacy is non-negotiable for enterprise Jira data.
+2. **Zero hardcoded credentials**: `.env` for dev convenience, `config.json` for UI-saved values, both git-ignored. No exceptions.
+3. **Transparent fallback**: When Ollama is unreachable, Groq takes over silently with a brief warning — no user intervention needed.
+4. **Auto-save results**: Every generation is timestamped and saved to `results/{TICKET_KEY}/` automatically. Chat sessions are ephemeral; results must persist independently.
+
+Source: [KB_03_Local_Test_Case_Generator.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/IQ_Notes/KB_03_Local_Test_Case_Generator.md)
+
+---
+
+**Q32: In a Streamlit AI tool that reads credentials from multiple sources (.env, config.json, defaults), how do you implement a clean priority chain?**
+
+**A:** I implement a three-layer merge in `config_store.load()`:
+
+```python
+def load() -> dict:
+    env_vals = _env_defaults()       # Read from os.environ (populated by python-dotenv)
+    merged = DEFAULTS.copy()          # Start with safe empty values
+    merged.update(env_vals)           # Layer 2: .env overwrites defaults
+    
+    stored = json.load(config.json)   # Layer 3: config.json overwrites .env
+    for key, val in stored.items():
+        if val:                        # Only override if non-empty
+            merged[key] = val
+    return merged
+```
+
+The critical subtlety is the `if val:` guard — it ensures that an empty string in `config.json` (e.g., a field the user cleared) doesn't silently erase a valid `.env` value. This is a common bug in naive merge implementations.
+
+The `.env`-to-config mapping uses a dictionary:
+```python
+_ENV_MAP = {
+    "JIRA_URL": "jira_url",
+    "JIRA_API_TOKEN": "jira_token",
+    "LLM_PROVIDER": "llm_provider",  # allows setting provider from .env too
+    ...
+}
+```
+
+Source: [config_store.py](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_03_Local_test_case_generator/config_store.py)
+
+---
+
+**Q33: An LLM keeps generating only 5 test cases and prefacing them with "Here are the test cases for your ticket." How do you fix this at the prompt engineering level?**
+
+**A:** Two separate problems, two targeted fixes:
+
+**Problem 1: Fixed count (stops at 5)**
+Root cause: The prompt template's PARAMETERS section had a placeholder `[e.g., 5, 10, "cover all exhaustively"]` — the model reads this as a literal instruction and stops at the first example value (5). Fix: Replace with an unambiguous directive:
+```
+- Number of test cases: Cover ALL requirements exhaustively —
+  do NOT stop at 5 or any other fixed number.
+```
+
+**Problem 2: Preamble text ("Here are the test cases...")**
+Root cause: Without explicit output constraints, the model applies conversational norms from its training. Fix: Add `⚠️ STRICT OUTPUT RULES` as the **very first content** in the prompt (before ticket data), since LLMs front-weight their attention:
+```
+⚠️ STRICT OUTPUT RULES:
+1. NO introduction, NO preamble, NO closing remarks.
+2. Start immediately with: ## Part 1 — Test Case Table
+```
+
+Placement is critical — constraints buried at the end of a 2,000-token prompt compete with recency bias and are frequently ignored. Front-placement maximizes compliance.
+
+Source: [app.py build_prompt()](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_03_Local_test_case_generator/app.py), [RICE POT Template PARAMETERS](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_03_Local_test_case_generator/templates/RICE_POT_Test_Case_Generator_Template.md)
+
+---
+
+**Q34: Compare Ollama and Groq as LLM backends for a QA tooling context. How do you decide which to use?**
+
+**A:**
+
+| Dimension | Ollama (Local) | Groq (Cloud) |
+|-----------|---------------|-------------|
+| **Data privacy** | 100% local — Jira ticket content never leaves the network | Data sent to external servers — risk for sensitive enterprise tickets |
+| **Cost at scale** | Free — bounded only by hardware | Free tier has TPM limits; paid tier required for production volume |
+| **Speed** | GPU: fast. CPU-only: slower than Groq | Very fast (dedicated LPU hardware), consistently low latency |
+| **Rate limits** | None | Free tier: ~6K TPM on `llama-3.1-8b-instant` — a single RICE POT prompt can consume 3K tokens, leaving only 3K for output |
+| **Model quality** | `llama3.2:latest` (3.2B) adequate for test cases; `qwen3.5:9b` (9.7B) for complex reasoning | `llama-3.1-8b-instant` (8B) higher baseline quality |
+| **Offline capability** | Full — works without internet | Requires internet |
+
+**Decision rule for QA tooling**: Use Ollama as primary for all production/enterprise use. The privacy argument alone is sufficient — testers should not be pushing ticket descriptions containing business-sensitive requirements to cloud APIs. Groq is the emergency fallback when Ollama is down (e.g., teammate's machine without local GPU).
+
+Source: [llm_client.py](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_03_Local_test_case_generator/llm_client.py), [KB_03](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/IQ_Notes/KB_03_Local_Test_Case_Generator.md)
+
+---
+
+**Q35: How do you make AI-generated test case results persistent and auditable in a team environment?**
+
+**A:** Three patterns work together:
+
+1. **Automatic timestamped save**: After every generation, `app.py` saves the full LLM output to `results/{TICKET_KEY}/{TICKET_KEY}_test_cases_{YYYYMMDD_HHMMSS}.md`. The timestamp ensures no generation overwrites another — you always have a full history per ticket. A `st.toast()` confirms the save to the user.
+
+2. **Metadata header**: Each saved file includes: ticket key, summary, generation timestamp, and LLM/model used. This makes the file self-describing — anyone opening it 6 months later knows exactly what produced it and from which ticket version.
+
+3. **Traceability in the table**: The `Req Ref` column in the test case table links every test case back to the Jira ticket key. Fields not backed by a stated requirement are marked `Not specified` rather than having a plausible-but-invented value — maintaining the "audit defensibility" principle from the RICE POT framework.
+
+For team environments, the `results/` folder would be committed to the repo (unlike `.env` and `config.json`), making every run's output version-controlled alongside the source code. This enables PR reviews that include the test case output generated from the ticket — a significant improvement over test cases living only in test management tools.
+
+Source: [app.py auto-save logic](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_03_Local_test_case_generator/app.py), [results/SCRUM-3/](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_03_Local_test_case_generator/results/SCRUM-3/)
+
