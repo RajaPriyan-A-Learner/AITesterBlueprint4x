@@ -669,6 +669,138 @@ Source: [SKILL.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E
 
 Result: 4 tailored, highlighted, professional `.docx` resumes in seconds, with full auditability and zero fabricated content.
 
-Source: [batch_build_resumes.js](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/output/batch_build_resumes.js); [walkthrough.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/walkthrough.md); [SKILL.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/resume-tailor/resume-tailor/SKILL.md)
+Source: [batch_build_resumes.js](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_04_AIJobKit/output/batch_build_resumes.js); [walkthrough.md](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_04_AIJobKit/walkthrough.md); [SKILL.md](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_04_AIJobKit/resume-tailor/resume-tailor/SKILL.md)
+
+---
+
+## Section I: AI Job Tracker — Local-First Engineering, IndexedDB & Kanban UX (Chapter 05)
+
+---
+
+**Q41: You built a "local-first" job tracker. What does local-first mean architecturally and why did you choose it over a backend?**
+
+**A:** Local-first means all user data is stored, processed, and persisted on the user's own device — no server, no cloud database, no authentication. The browser is the backend. In Chapter 05, this is implemented using IndexedDB as the persistence layer. The engineering rationale for choosing local-first:
+
+1. **Zero latency CRUD**: No network round trip for reads or writes — every operation is synchronous from the user's perspective.
+2. **Offline-first**: The app works without any internet connection after first load.
+3. **Privacy by default**: Job search data (salaries, referrals, rejected applications) is sensitive — local-first means it never leaves the device.
+4. **No infrastructure cost**: No server to provision, no DB to manage, no auth tokens to secure.
+5. **JSON export/import as the sync mechanism**: Instead of a cloud sync service, the user owns their data and can back it up or restore it manually.
+
+The trade-off: data is device-specific and lost if the browser's IndexedDB is cleared. This is mitigated by the Export feature.
+
+Source: [implementation_plan.md](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/implementation_plan.md), lines 1–3; [KB_05_AIJobTracker.md](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/IQ_Notes/KB_05_AIJobTracker.md)
+
+---
+
+**Q42: Compare IndexedDB vs localStorage. When would you use each in a frontend app?**
+
+**A:**
+
+| Property | localStorage | IndexedDB |
+|----------|-------------|-----------|
+| **API type** | Synchronous (blocks main thread) | Asynchronous (Promise/event-based) |
+| **Data type** | Strings only (must JSON.stringify) | Native JavaScript objects |
+| **Storage limit** | ~5 MB per origin | Hundreds of MB (browser-dependent) |
+| **Querying** | None — key-only lookup | Indexes, cursors, range queries |
+| **Transactions** | None | Full ACID transactions |
+| **Use case** | Small config: dark mode preference, auth tokens, feature flags | Structured app data: job cards, messages, offline docs |
+
+For the Job Tracker, `localStorage` stores only the dark mode preference (`'jt-dark': 'true'/'false'`). IndexedDB stores all job records because each card is a structured object with 10+ fields, and the collection can grow to 100+ cards — far beyond localStorage's limits and semantics.
+
+Source: [db.js](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/lib/db.js), lines 1–24; [App.jsx](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/App.jsx), lines 18–25
+
+---
+
+**Q43: Walk me through the IndexedDB layer design in the Job Tracker. What engineering decisions did you make?**
+
+**A:** The `db.js` module uses four key design decisions:
+
+1. **Singleton promise pattern**: `let dbPromise = null` at module scope. `getDB()` initializes the database on first call and reuses the promise on all subsequent calls. This avoids the overhead of re-opening the connection on every CRUD call — critical for drag-and-drop where `moveJob` is called on every drop.
+
+2. **Schema-as-upgrade-callback**: The `upgrade(db)` callback in `openDB()` only runs when the database version increments. Indexes on `status` and `createdAt` allow efficient queries by column and date. Adding a new field or index in a future version simply bumps `DB_VERSION`.
+
+3. **`put` for upsert**: `updateJob` uses `db.put()` which inserts if missing or overwrites if the ID exists. This makes the import flow (bulk-restore from JSON backup) use the same function as normal updates — no separate "insert-or-update" logic needed.
+
+4. **Single-transaction bulk import**: `bulkAddJobs` opens one `readwrite` transaction and pushes all `put` calls into it. If any write fails, the entire transaction rolls back — atomicity for the import feature.
+
+Source: [db.js](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/lib/db.js), lines 7–55
+
+---
+
+**Q44: Explain optimistic UI and how it applies to the Kanban drag-and-drop in Chapter 05.**
+
+**A:** Optimistic UI is a UX pattern where the interface updates **immediately** to reflect a user action, without waiting for the async persistence operation to complete. The assumption is that the operation will succeed — and if it fails (rare), you reconcile afterward.
+
+In the Job Tracker's `moveJob` hook:
+
+```js
+const moveJob = useCallback(async (id, newStatus) => {
+  setJobs((prev) => {
+    const updated = { ...job, status: newStatus };
+    dbUpdate(updated);              // Fire-and-forget — IDB write happens async
+    return prev.map(j => j.id === id ? updated : j); // UI updates NOW
+  });
+}, []);
+```
+
+When a user drops a card on a different column, the card appears in the new column **instantly** — no spinner, no delay. The IDB write completes 5–50ms later in the background. This matches the UX expectations set by Linear, Trello, and Jira. The alternative — waiting for IDB before updating state — would cause a visible "snap-back then snap-forward" flicker that feels broken.
+
+Source: [useJobs.js](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/hooks/useJobs.js), lines 32–40
+
+---
+
+**Q45: How would you test the Job Tracker's drag-and-drop and IndexedDB persistence as a QA Lead?**
+
+**A:** Testing strategy across three layers:
+
+**Unit Tests** (Vitest + `fake-indexeddb`):
+- Mock IDB in Node.js using the `fake-indexeddb` package
+- Test each `db.js` function: `addJob` creates a record with `id` and `createdAt`; `updateJob` overwrites; `deleteJob` removes; `getAllJobs` returns all; `bulkAddJobs` is atomic
+- Test `useJobs` hook with `renderHook` + mocked db functions
+
+**Integration Tests** (Playwright):
+- `Add card → page refresh → assert card is still visible` (proves IDB persistence)
+- `Drag card from Wishlist to Applied → assert status changed in IDB` (query IDB via `page.evaluate`)
+- `Export → clear IDB via browser DevTools → Import → assert cards restored`
+- `Search "Google" → assert only Google cards visible in all columns`
+
+**Visual Regression**:
+- Snapshot the board in light mode and dark mode
+- Snapshot the modal open state with and without validation errors
+
+Source: [walkthrough.md](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/walkthrough.md), lines 50–64; [KB_05_AIJobTracker.md](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/IQ_Notes/KB_05_AIJobTracker.md)
+
+---
+
+**Q46: How do Chapters 04 and 05 form an integrated AI-augmented career toolkit? What's the end-to-end workflow?**
+
+**A:** Chapters 04 and 05 form a complete, AI-driven job search system with no SaaS dependency:
+
+```
+[LinkedIn CSV of JDs]
+        ↓
+[Chapter 04: resume-tailor SKILL]
+  → Honesty Gate per JD
+  → Tailored .docx per role (e.g., Resume_Woolworths_SrAutomationEng.docx)
+  → Yellow highlights show every JD-specific change
+        ↓
+[Chapter 05: Job Tracker Kanban]
+  → Add job card for each role applied to
+  → resumeUsed field = Chapter 04 output filename
+    (e.g., "Resume_Woolworths_SrAutomationEng")
+  → Track status: Wishlist → Applied → Follow-up → Interview → Offer/Rejected
+  → Notes field: recruiter name, referral, interview round details
+  → All data persists in IndexedDB — no cloud, no account
+        ↓
+[Backup & Archive]
+  → Export JSON from Chapter 05 tracker
+  → Archive alongside Chapter 04 .docx files
+```
+
+The `resumeUsed` field is the explicit join key between the two systems — it ties each job card back to the exact Chapter 04 output resume file, creating a fully auditable job search record: which resume was tailored for which company, when it was applied, and what happened.
+
+Source: [implementation_plan.md](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/implementation_plan.md), lines 47–53; [KB_04_AIJobKit.md](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/IQ_Notes/KB_04_AIJobKit.md); [KB_05_AIJobTracker.md](file:///c:/Users/rajap/OneDrive/เอกสาร/LEARNINGAITESTER4X/IQ_Notes/KB_05_AIJobTracker.md)
+
 
 
