@@ -1,0 +1,1496 @@
+"Company","Job Title","Job Description"
+"AMD","System Testing and Automation Engineer","ADVANCE YOUR CAREER. ADVANCE THE WORLD.
+
+At AMD, we believe technology can change lives for the better. It can heal us, entertain us, and make us more connected, productive, and understanding of the world around us. And we're looking for talent who feel the same: people who want to leave the planet better than they found it, those who don't shy away from humanity's challenges but are determined to help solve them.
+
+AMD is powering the next generation of supercomputing, high-performance computing, cloud, and AI. Whether you're designing next-gen processors, enabling AI breakthroughs, or creating go-to-market plans, every role at AMD contributes to something bigger — technology that moves the world forward.
+
+System Testing and Automation Engineer
+
+THE ROLE:
+
+AMD is looking for an influential software engineer who is passionate about improving the performance of key applications and benchmarks. You will be a member of a core team of incredibly talented industry specialists and will work with the very latest hardware and software technology. You will be building the product quality verification portfolio for the industry leading Network Infrastructure accelerators.
+
+THE PERSON:
+
+The ideal candidate should be passionate about software engineering and possess leadership skills to drive sophisticated issues to resolution. Able to communicate effectively and work optimally with different teams across AMD.
+
+KEY RESPONSIBILITIES:
+
+Active contribution to the day-to-day activities of the System Test in an Agile environment
+Write Test plans and review it with all stakeholders to cover the scenarios comprehensively and execute efficiently.
+Build maintainable, high quality and effective automated test scripts
+Review and triage test failures and verify fixes
+Help customer reported issues by reproducing the issue locally, work with peer teams for faster resolution
+Stay informed of software and hardware trends and innovations, especially pertaining to networking and accelerators
+Debugging complex technical issues and collaborate with peer teams
+Develop technical relationships with peers and partners
+
+PREFERRED EXPERIENCE:
+
+5+ years of experience in Networking Testing and Automation roles.
+Proficiency in writing Automation Scripts using Python
+Experience in various test tools, performance testing tools such as Ixia, etc.,
+Expert in networking technology in Routing and Switching, Micro-segmentation, VXLAN, etc.,
+Prior experience in Cloud, Security, Data Center technologies is an added advantage
+Working knowledge in RDMA Technologies is added advantage
+Handson exposure to AI technologies such as GPUs, Slurm, ROCM, different AI Workloads etc., are added advantage
+Strong troubleshooting skills
+Knowledge of operating systems, kernel mode programming, device drivers, and related technologies and architectures
+Good interpersonal skills and effective communication
+Ability to write high quality automation code with a keen attention to detail
+Experience in administration of Linux operating system, VMware ESX, Windows Server
+Experience with software development processes and tools such as debuggers, source code control systems (GitHub) and profilers is a plus
+Effective communication and problem-solving skills
+Motivating leader with good interpersonal skills
+
+ACADEMIC CREDENTIALS:
+
+Bachelor's or Master's degree in Computer Science, Computer Engineering, Electrical Engineering, Electronics Engineering or equivalent
+
+Benefits offered are described: AMD benefits at a glance.
+
+AMD does not accept unsolicited resumes from headhunters, recruitment agencies, or fee-based recruitment services. AMD and its subsidiaries are equal opportunity, inclusive employers and will consider all applicants without regard to age, ancestry, color, marital status, medical condition, mental or physical disability, national origin, race, religion, political and/or third-party affiliation, sex, pregnancy, sexual orientation, gender identity, military or veteran status, or any other characteristic protected by law. We encourage applications from all qualified candidates and will accommodate applicants' needs under the respective laws throughout all stages of the recruitment and selection process.
+
+AMD may use Artificial Intelligence to help screen, assess or select applicants for this position. AMD's ""Responsible AI Policy"" is available here.
+
+This posting is for an existing vacancy."
+"Pearson","Senior Quality Assurance Engineer","Role: Senior Quality Assurance Engineer Location: Bengaluru/Chennai - Hybrid (3 days in Office/Week)
+
+The Quality Assurance (QA) Test Engineer plays a critical role within our agile delivery team, contributing both as hands-on tester, continual development of automated QA systems and partner in shaping our quality assurance practices. This role is responsible for executing functional and exploratory testing to ensure product reliability, while also collaborating with cross-functional teams to define, implement and continuously improve QA frameworks, standards, and processes.
+
+The QA Test Engineer works closely with developers, product managers, and stakeholders to embed quality throughout the delivery lifecycle – supporting a culture of excellence and accountability across the organization.
+
+Selenium, Cucumber, Postman, Java
+
+Functional Testing, regression testing, API testing, Test Automation
+
+Essential Functions
+
+Execute testing activities, including functional, regression, integration, and user acceptance testing.
+
+Collaborate with developers and product owners during refinement to ensure clear, testable acceptance criteria.
+
+Identify gaps in current testing practices and actively contribute to establishing consistent QA processes, standards, and documentation.
+
+Develop test cases, automates test scripts, and test data; maintain reusable test assets.
+
+Support the setup and use of test management tools and frameworks to improve visibility and traceability.
+
+Participate in agile ceremonies (daily stand up, sprint reviews, retros) to champion quality and continuous improvement.
+
+Assist in building metrics and reporting on quality trends for releases.
+
+Perform other duties as assigned to support team and organizational goals.
+
+Required Expertise
+
+Associate's degree in computer science, Information Systems, or related field with 4 + years of experience in software testing
+
+(OR) Bachelor's degree in computer science, Information Systems, or related field with 2 to 3 years of experience in software testing
+
+Proven ability to lead a small team of QA engineers
+
+Strong understanding of agile delivery frameworks and the scrum process
+
+Strong understanding of QA methodologies, tools, and best practices
+
+Experience contributing to or helping establish structured QA processes, frameworks, or standards
+
+Experience with test management tools (e.g., ADO, JIRA, or something similar)
+
+Effective communication and collaboration skills to work effectively across business and technical teams
+
+Preferred Skills
+
+Familiarity with test automation frameworks and scripting (e.g., Selenium, Playwright, other)
+
+Familiarity with DevOps practices, CI/CD pipelines, and their impact on quality assurance
+
+Familiarity with Pearson Psychometric products
+
+Pearson is an Equal Opportunity Employer and a member of E-Verify. Employment decisions are based on qualifications, merit and business need.
+
+Job: Engineering
+Job Family: TECHNOLOGY
+Organization: Assessment & Qualifications
+Schedule: FULL_TIME
+Workplace Type: Hybrid
+Req ID: 25336"
+"Pine Labs","SDET III","Senior QA Engineer / SDET III
+
+5+ years of experience
+
+We at Pine Labs are looking for those who share our core belief - ""Every Day is Game day"". We bring our best selves to work each day to realize our mission of enriching the world through the power of digital commerce and financial services.
+
+Why this exists
+
+Fave is a UPI app built around homes, not individuals. Flat mates splitting rent and groceries. Dual-income couples managing a household together. Families paying the cook, the maid, the driver. The everyday money that moves between the people you live with — finally in one place.
+
+The Role:
+
+UPI made payments invisible. That's the magic — until something fails. The moment money doesn't move, trust doesn't come back. In payments a bug isn't a cosmetic glitch; it's someone's rent that didn't reach their flat mate, a settlement that silently dropped. You're the person who finds that failure before a user ever does.
+
+You'll be on a very small team. No QA department to hide behind, no wall to throw bugs over. You won't be ""the QA person who runs test cases."" You'll be the quality backbone of the product — someone who thinks like a PM, breaks things like a hacker, and automates like an engineer.
+
+What you'll spend time on:
+
+Owning product quality end-to-end — reading PRDs, challenging assumptions, mapping user journeys, finding the gaps before code is written
+Hunting edge cases in UPI flows — stress-testing every transaction path across devices, UPI apps, and network conditions
+Building and maintaining automated regression suites — golden-path transaction flows must never break; you own the framework (Flutter integration tests, E2E tools like Patrol/Maestro), wire it into CI/CD, and keep it healthy as the product evolves
+Testing at the API layer — simulating timeout and failure scenarios, validating reconciliation logic, catching state-machine bugs before they hit production
+Using AI aggressively — LLMs to generate test cases from PRDs, write automation scripts, analyse logs, build internal QA tooling
+Collaborating directly with product and engineering — filing bugs that change product decisions, pushing back on ambiguous requirements
+
+Who we're looking for
+
+5+ years in QA/SDET roles, with at least 2 years on mobile apps
+Payments or fintech domain experience — you've tested UPI, wallets, lending, or card payment flows; you understand async transaction lifecycles, callback handling, idempotency, and reconciliation edge cases
+Flutter experience preferred — familiarity with flutter_test, widget testing, integration testing, and the Flutter/Dart ecosystem
+API testing expertise — Postman, REST clients, mocking API responses, validating webhook payloads
+Automation mindset — you've built and maintained regression suites; CI/CD integration experience (GitHub Actions, Bitrise, Codemagic, or similar)
+Already using AI in your daily workflow — Claude, ChatGPT, Copilot, Cursor for test generation, code, log analysis, internal tooling
+Product thinking — given a feature brief, you independently enumerate user journeys, failure modes, and edge cases
+
+Bonus: You've worked at a UPI app or payments company. Comfortable with Charles Proxy / mitmproxy, reading Dart/Flutter code, device farms (BrowserStack, Firebase Test Lab) for Android fragmentation, or performance and load testing.
+
+How to apply: Email asif@fave.money / george@fave.money with a short write-up of one real bug you caught."
+"TEKsystems","Senior Quality Assurance Engineer","EXPERIENCE & KEY SKILLS:
+
+1. Understanding and experience of software test methodologies & types of test automation frameworks
+2. AGILE scrum methodology experience & Safe agile is mandatory.
+3. Hands-on experience on manual testing & automating web-based or PC based software
+4. Experience in coaching other testers.
+5. Understanding and experience of various aspects of software and system testing, Functional, non-functional, integration, system, performance, robustness, compatibility, regression, customer mode testing.
+6. Candidates with working knowledge & hands on any automation tool like Test Complete/Python/Selenium with Robot Framework are essential
+7. Working knowledge on JavaScript, TypeScript, Python, Selenium, HTML, CSS
+8. Design build and maintain test automation frameworks using TypeScript/JavaScript with Playwright – mandatory
+9. Hands-on test automation experience with JavaScript and TypeScript - mandatory
+10. Hands-on experience with Playwright for both UI and API automation - mandatory
+11. Develop and maintain automated regression and smoke suites; keep them stable, reliable, and low-noise
+12. Convert high-value manual regression cases into automated coverage
+13. Integrate automated suites into CI/CD pipelines and report results back to the team
+14. Automate API tests using Playwright's built-in API testing capabilities (APIRequestContext / request fixture) in TypeScript.
+15. Perform exploratory and manual API testing using Postman or equivalent tools
+16. Test REST services and SOAP services where applicable.
+17. Validate applications against JSON/XML API contracts, including schema validation, error handling, authentication, and negative scenarios.
+18. Combine UI and API layers in end-to-end scenarios using API calls for test setup, data seeding, and state verification.
+19. Own quality assurance for assigned applications and features across frontend and backend layers
+20. Identify, log, prioritise, and track defects to closure; reproduce issues and partner with developers on root cause.
+21. Contribute to test strategy, test plans, estimation, and quality gates within the SDLC.
+22. Participate fully in Agile/Scrum ceremonies — sprint planning, standups, reviews, and retrospectives.
+23. Ensure compliance with web, cloud, browser, and API standards.
+24. Candidates with knowledge of different protocols, like Modbus, HTTP, SNMP, IEC61850, working knowledge on Wireshark frame trace, Modbus logs etc would be preferred.
+25. Knowledge on electrical distribution devices are preferable."
+"Dentsu Global Services","Senior Test Engineer (AI model testing)","The purpose of this role is to develop required software features, achieving timely delivery in compliance with the performance and quality standards of the company.
+
+Location: Mumbai/Pune/Gurugram/Bengaluru
+Experience - 4-6 Years
+
+Job Summary:
+
+The purpose of this role is to take responsibility for conducting manual testing and AI output validation to ensure the software created by developers functions properly and meets the business needs as well.
+
+This role is responsible for fully testing the product or system and tracking issues and defects at all levels of their testing. The candidate will have a strong background in developing test cases, implementing test processes, and recording results for an AI based application. Additionally, the candidate should be proficient in test AI Model, the knowledge sources, regression, integration, and system testing.
+
+Job Responsibilities:
+
+Develops and executes accurate test cases as per requirements, analyses results and raises issues within schedule.
+Ensures optimal test coverage comprising of positive, negative and exception scenarios.
+Logs defects with right priority, tracking them to closure and understanding the root cause for an issue.
+Tests and proves that the software meets major architectural requirements.
+Provides feedback on usability and serviceability, traces the result to quality risk and reports it to concerned people.
+Validates AI generated images, video outputs, recommendations and end-user workflows across supported scenarios.
+Coordinates with product management and Developer/System Engineer to deliver stable enterprise software products.
+Analyses and verifies best test approaches and executes acceptance, integration, installation, and system testing.
+Records test results, validates defect fixes and verifies overall quality acceptance criteria.
+Engages in both functional and non-functional testing, participates in requirement understanding, scrum meeting, reviews and test strategy sessions.
+Creates and maintains QA and project documentation.
+Analyses problems reported in production application, identifies root causes and communicates results with appropriate stakeholders towards resolution.
+
+Job Requirements (Must Have):
+
+Minimum 4 to 6 years of experience
+Hands on experience in working with Agile Teams
+Ability to implement test plans, follow test process, and record results
+Strong expertise in writing test cases, reviewing AI outputs, and analyzing test results
+Proficiency in functional, regression, integration, exploratory and system testing
+Experience testing AI-powered applications involving image, videos
+Understanding of Generative AI concepts, prompt testing, hallucination detection and output quality assessment
+Experience validating AI recommendations, image updates, video outputs and content transformations
+Hands-on experience in API Testing
+Familiarity with tools such as JIRA and Git
+Strong attention to detail and commitment to quality
+Strong communication skills and ability to solve problems
+
+Good to have:
+
+Knowledge on Testing framework like Playwright, CodeceptJS
+Knowledge of multimodal AI testing (text, image and video)
+Knowledge of cloud technologies, preferably Azure
+Understanding of Responsible AI, bias testing and content safety validation
+Experience with data validation and model output comparison
+Experience/knowledge of performance/load/volume testing
+Experience with performance tools such as JMeter.
+
+Location: DGS India - Bengaluru - Manyata N1 Block
+Brand: Merkle
+Time Type: Full time
+Contract Type: Permanent"
+"Woolworths Group International","Senior Automation Engineer(C#)","Senior Quality Engineer
+
+Driving quality excellence through precision, innovation, and continuous improvement.
+Opportunity to be one of our first team members in Woolworths Group India in Bangalore
+
+Woolworths Group India is partnering exclusively with Zinnov Group to recruit for this position.
+
+About the role
+
+As a Senior Quality Engineer, you’ll be responsible for delivering robust, reliable, and high-performing software solutions that meet the needs of our customers and align with Woolworths’ business objectives. You’ll work closely with engineers, product managers, business analysts, UX/UI designers, and stakeholders to embed quality across the software development lifecycle, contributing to test automation, shift-left practices, and continuous improvement to ensure our software is reliable, scalable, and secure.
+
+What you’ll do
+
+Drive Quality Across the SDLC: Drive quality across the software development lifecycle by designing, building, and executing test automation frameworks and quality practices that deliver reliable, performant software solutions aligned with Woolworths’ business objectives.
+Partner with Product & Business: Collaborate closely with Product Managers, Business Analysts, and engineers to review requirements, shape acceptance criteria, and translate user stories into comprehensive test cases and scenarios that ensure functional and non-functional quality.
+Champion Test Automation & Best Practices: Champion test automation, shift-left testing, and quality engineering best practices through code reviews, automated test coverage, and CI/CD integration. Promote a culture of quality across the team.
+Drive Innovation & Experimentation: Stay current with quality engineering trends, tools, and technologies, exploring new approaches to continuously improve test efficiency, coverage, and reliability.
+Collaborate & Mentor: Collaborate effectively with cross-functional teams to ensure alignment on quality goals. Mentor junior quality and software engineers, sharing knowledge and experience to foster their growth.
+
+What you’ll bring
+
+As a Senior Quality Engineer, you will need 7+ years of experience and a proven portfolio of shipped applications, demonstrating the following skillset:
+
+Test Automation & Frameworks: Demonstrated expertise in designing and building scalable test automation frameworks across UI, API, and integration layers, with hands-on experience using tools such as Playwright, Selenium, Cypress, Postman, RestAssured, or similar.
+Expert Quality Engineer: Deep understanding of software testing methodologies, test design techniques, and quality engineering best practices. Proficient in C# along with strong scripting skills to build robust automation solutions.
+Quality Vision & Problem-Solving: Contributes to quality strategies for complex, distributed, and event-driven systems. Creative problem-solver who innovates to improve test coverage, reliability, and delivery speed.
+CI/CD & Performance Advocate: Champions test automation in CI/CD pipelines, performance testing, and non-functional quality. Conducts thorough test reviews and advocates for shift-left testing practices.
+Cloud-Native Expertise: Hands-on experience designing and executing test strategies on major cloud platforms (GCP, AWS, or Azure), with a strong understanding of cloud-native services, containerization, and event streaming technologies (e.g., Pub/Sub).
+Agentic Engineering (Preferred): Experience leveraging AI coding agents and agentic workflows to accelerate test creation, validation, and quality engineering productivity.
+Continuous Learner: Stays current with quality engineering trends, technologies, and best practices. Eager to learn and expand knowledge.
+
+What you’ll experience
+
+Be a part of Australia’s largest retailer
+Constant mentoring and training provided
+Generous performance based bonus
+20 days annual leave
+A flexible approach to work
+Premium insurance coverage for you and your dependants
+
+Everyone belongs at Woolworths Group
+
+Diversity, equity, inclusion, and belonging are key to realising our purpose of better together for a better tomorrow. We recognise the value our team’s diversity brings to our business, customers, and communities and that teams with diverse experiences and backgrounds enrich our group and are better able to innovate and solve problems. As one of the largest employers in Australia and New Zealand, we aim to create a truly inclusive workplace where everyone feels that they belong, can be their best selves, and reach their full potential.
+
+We encourage all candidates to apply; please let us know in your application if we can support you with any adjustments in the hiring process.
+
+Your Personal Data
+
+By submitting your application, you acknowledge and consent to Zinnov Management Consulting Private Limited and its subsidiaries (Zinnov) and/or Woolworths Group Limited and its subsidiaries (Woolworths Group) collecting, processing and disclosing your personal information, including any sensitive personal information provided by you, for the purposes of managing the recruitment process, assessing your suitability for employment, communicating with you regarding your application, and, where appropriate, considering you for future employment opportunities, to the extent relevant. If your application is successful, Zinnov and/ or Woolworths Group will also use your personal information, including sensitive personal information, for managing your ongoing working relationship.
+
+Your personal information will be handled, in accordance with applicable privacy laws.
+
+To learn more about how we collect, use, disclose and safeguard your personal information, including your privacy rights, please refer to the Zinnov Privacy Policy and Woolworths Group Team Member Privacy Notice.
+
+… more
+
+Requirements added by the job poster
+
+• 3+ years of work experience with C#
+
+• 7+ years of work experience with Test Automation Tools"
+"Palo Alto Networks","Principal SQA Engineer - AI/Automation","Our Mission
+
+At Palo Alto Networks®, we’re united by a shared mission—to protect our digital way of life. We thrive at the intersection of innovation and impact, solving real-world problems with cutting-edge technology and bold thinking. Here, everyone has a voice, and every idea counts. If you’re ready to do the most meaningful work of your career alongside people who are just as passionate as you are, you’re in the right place.
+
+Who We Are
+
+In order to be the cybersecurity partner of choice, we must trailblaze the path and shape the future of our industry. This is something our employees work at each day and is defined by our values: Disruption, Collaboration, Execution, Integrity, and Inclusion. We weave AI into the fabric of everything we do and use it to augment the impact every individual can have. If you are passionate about solving real-world problems and ideating beside the best and the brightest, we invite you to join us!
+
+We believe collaboration thrives in person. That’s why most of our teams work from the office full time, with flexibility when it’s needed. This model supports real-time problem-solving, stronger relationships, and the kind of precision that drives great outcomes.
+
+Job Summary
+
+Job Summary
+
+We are looking for a highly motivated AI-savvy Principal Software Quality Assurance Engineer to join our Digital Web QA team. As a Principal SQA Engineer, you will be responsible for creating and implementing a strategy for quality coordination and transforming how we test and validate as well as suggesting solutions to identified quality problems. All this in a fast paced, agile-based process of development, test and release. In this role, you will design and implement autonomous QA workflows that leverage AI to achieve unprecedented test coverage, efficiency, and defect detection. You will take ownership of quality outcomes, mentor teams, and drive innovation in how we approach testing at scale.
+
+Key Responsibilities
+
+Design and implement autonomous scalable End-to-End (E2E) QA workflows using AI agents and LLM-based frameworks to achieve continuous, intelligent test execution across multiple services.
+Develop AI-augmented test infrastructure enabling scalable, context-aware testing that reflects real-world deployment scenarios —specifically integrating self-healing test suites, AI-driven test case generation, and Visual AI regression tools.
+Build AI-powered test generation systems that automatically create comprehensive test suites from requirements, specifications, and production telemetry.
+Participate in system design to ensure quality, observability, and testability are built-in throughout the feature development lifecycle.
+Provide technical leadership in browser security, cloud orchestration, distributed systems, and AI-assisted quality engineering across multi-team quality initiatives.
+Mentor junior and mid-level engineers on AI/ML testing techniques, prompt engineering, and modern quality practices; lead adoption of new testing methodologies and measure impact.
+Collaborate with Development, SRE, Product Management, and Technical Marketing to align quality strategy with business outcomes and establish quality standards.
+Enhance test strategies, automation, and build infrastructure with feedback and analysis from real-world customer deployments.
+Stay current with AI/ML advancements and translate them into practical testing innovations like agentic workflows, multimodal testing, and AI-powered observability.
+Execute system tests including functional and E2E on sanity, regression, pre-production, and post-production phases in a tight release schedule
+Track and report the outcome of test executions and all information needed to support ongoing measurements and reporting on risks, defects, tests, and coverage.
+Conduct deep-dive root cause analysis on complex, multi-system bugs and collaborate directly with developers to implement corrective actions.
+Establish the overarching AI strategy for new features and major website redesigns in a fast-paced, Agile/Scrum environment.
+Conduct system functional testing to ensure system quality, reliability, capacity, and scalability.
+Compare and analyze system behavior vs. expected results/KPIs based on business and technical requirements.
+
+Qualifications
+
+Required Qualifications
+
+M.S./B.S. degree in Engineering, or equivalent military experience required.
+10+ years of experience in QA/Test Automation Engineering with demonstrated impact on product quality and team practices.
+2+ years of hands-on experience with AI/ML technologies, including LLMs, prompt engineering, and AI-assisted development workflows.
+2+ years of experience in Adobe Experience Manager (AEM/CQ) or similar content management application testing.
+Proven track record of building autonomous testing systems or AI-powered quality engineering tools.
+Intermediate to Expert level experience with REST API driven automation using Python.
+Expertise in REST API testing, web UI automation (Selenium, Playwright, Puppeteer), and cloud-native application testing.
+Should have strong analytical, problem-solving, and judgment skills, and a strong ability to understand the business process flow.
+Ability to learn quickly and effectively and to remain focused in a diverse team environment
+Exceptional analytical, troubleshooting, and problem-solving mindset.
+Able to multitask and work on multiple projects simultaneously.
+Proficient knowledge of Agile software QA methodologies, tools, and processes
+Resilience and focus when delivering against tight timelines in a dynamic corporate environment.
+Should have a good understanding of Testing Fundamentals
+Strong communication skills with a track record of mentoring junior or functional peers through technology shifts.
+Experience working in an Agile/Scrum development process
+
+Preferred Qualifications
+
+Experience with designing or building automation frameworks from scratch for Endpoint products.
+Experience building RAG pipelines, vector databases, and knowledge graphs for test intelligence.
+Experience in CI/CD Environments and hands-on in Jenkins / Build tools will be an added advantage.
+
+Our Commitment
+
+We’re trailblazers that dream big, take risks, and challenge cybersecurity’s status quo. It’s simple: we can’t accomplish our mission without diverse teams innovating, together.
+
+We are committed to providing reasonable accommodations for all qualified individuals with a disability. If you require assistance or accommodation due to a disability or special need, please contact us at accommodations@paloaltonetworks.com.
+
+Palo Alto Networks is an equal opportunity employer. We celebrate diversity in our workplace, and all qualified applicants will receive consideration for employment without regard to age, ancestry, color, family or medical care leave, gender identity or expression, genetic information, marital status, medical condition, national origin, physical or mental disability, political affiliation, protected veteran status, race, religion, sex (including pregnancy), sexual orientation, or other legally protected characteristics.
+
+All your information will be kept confidential according to EEO guidelines.
+
+Is role eligible for Immigration Sponsorship? No. Please note that we will not sponsor applicants for work visas for this position.
+… more"
+"CGI","Job Description – SDET Quality Engineering (QE) - Enablement Platform","Position Description
+
+We are seeking a highly skilled Software Development Engineer in Test (SDET) with strong expertise in test automation, quality engineering, and CI/CD practices. The ideal candidate will be responsible for designing, developing, and maintaining scalable automation frameworks while ensuring the quality, reliability, and performance of enterprise applications. The role requires close collaboration with developers, product owners, and DevOps teams to enable continuous testing and accelerate software delivery.
+
+Position: Technical Lead – SDET
+
+Experience: 8+ years
+
+Category: Software Development / Engineering
+
+Primary Location: Bangalore, India
+
+Employment Type: Full Time
+
+Your future duties and responsibilities
+
+Design, develop, and maintain robust automation frameworks for web, API, mobile, and backend applications.
+
+Develop automated functional, regression, integration, smoke, and end to end test suites.
+Build and execute API automation using REST Assured, Postman, Karate, or similar tools.
+Perform UI automation using Selenium, Playwright, Cypress, or equivalent frameworks.
+Integrate automated test suites into CI/CD pipelines using Jenkins, GitHub Actions, Azure DevOps, GitLab CI, or similar platforms.
+Collaborate with development teams to identify test scenarios and improve application quality throughout the SDLC.
+Analyze application requirements, user stories, and technical specifications to create comprehensive test strategies and test cases.
+Execute manual testing for new features where automation is not feasible.
+Perform defect identification, root cause analysis, reporting, and verification using JIRA or equivalent defect management tools.
+Support performance, security, and accessibility testing initiatives where applicable.
+Participate in Agile ceremonies including sprint planning, backlog refinement, stand ups, reviews, and retrospectives.
+Mentor junior QA engineers and promote automation best practices across teams.
+Continuously improve test automation coverage, execution efficiency, and reporting.
+
+Required Skills
+
+Strong programming experience in Java, Python, C#, or JavaScript/TypeScript.
+Hands on experience with Selenium WebDriver, Playwright, Cypress, or Appium.
+Experience with API automation using REST Assured, Postman, Karate, or similar tools.
+Strong knowledge of testing frameworks such as TestNG, JUnit, NUnit, or PyTest.
+Experience with version control systems such as Git.
+Good understanding of CI/CD tools including Jenkins, GitHub Actions, Azure DevOps, Bamboo, or GitLab CI.
+Experience with defect tracking tools such as JIRA.
+Knowledge of SQL and database validation.
+Familiarity with Agile/Scrum development methodologies.
+
+Preferred Skills
+
+Required qualifications to be successful in this role
+
+Experience with cloud platforms such as AWS, Azure, or Google Cloud Platform (GCP).
+Knowledge of containerization technologies including Docker and Kubernetes.
+Experience in performance testing using JMeter, Gatling, or LoadRunner.
+Exposure to security testing tools such as OWASP ZAP or Burp Suite.
+Experience with contract testing and service virtualization.
+Knowledge of BDD frameworks such as Cucumber or SpecFlow.
+Experience using AI powered testing tools such as GitHub Copilot, Devin AI, Claude AI, Gemini, Windsurf, Testim, Mabl, or Functionize to accelerate test automation and improve productivity.
+
+Required Qualifications To Be Successful In This Role
+
+Bachelor's or Master's degree in Computer Science, Information Technology, Engineering, or a related field.
+
+7–10+ years of experience in Software Testing, Test Automation, or Quality Engineering.
+Relevant certifications such as ISTQB, Certified Selenium Professional, or cloud certifications are an added advantage.
+
+Key Competencies
+
+Strong analytical and problem solving skills.
+Excellent debugging and troubleshooting capabilities.
+Automation first mindset with focus on quality engineering.
+Strong communication and stakeholder management skills.
+Ability to work effectively in Agile and cross functional teams.
+Continuous learning mindset with interest in emerging QA technologies and AI driven testing.
+
+Together, as owners, let’s turn meaningful insights into action.
+
+Life at CGI is rooted in ownership, teamwork, respect and belonging. Here, you’ll reach your full potential because…
+
+You are invited to be an owner from day 1 as we work together to bring our Dream to life. That’s why we call ourselves CGI Partners rather than employees. We benefit from our collective success and actively shape our company’s strategy and direction.
+
+Your work creates value. You’ll develop innovative solutions and build relationships with teammates and clients while accessing global capabilities to scale your ideas, embrace new opportunities, and benefit from expansive industry and technology expertise.
+
+You’ll shape your career by joining a company built to grow and last. You’ll be supported by leaders who care about your health and well-being and provide you with opportunities to deepen your skills and broaden your horizons.
+
+That same commitment to fairness extends to how we use technology. To support our recruitment team, AI tools may be used to help assess applications though they never replace human judgement. All hiring decisions remain entirely in the hands of our recruitment professionals.
+
+Come join our team—one of the largest IT and business consulting services firms in the world.
+
+… more"
+"Neo","Quality Assurance Engineer II","About Neo
+
+AI is the most significant shift in how work gets done since the advent of the Internet — yet most organizations fail to capture its value. Neo is changing that.
+
+Founded by Bhavin Turakhia — Co-Founder of Zeta, Radix, and Titan — Neo is building an integrated, AI-first suite of products that capture work, centralize context, and make AI a first-class participant in every workflow:
+
+Tasket — A radically reimagined, AI-native work management platform that centralizes context and makes AI delegation seamless for all work.
+Friday — AI Assistant, co-worker and agent platform, pre-integrated into Tasket, Studio, Drive and 1000+ SaaS platforms.
+Studio — AI-native suite for co-creating docs, spreadsheets and diagrams collaboratively with humans and agents.
+Drive — AI-native repository, where humans and agents can co-work on files.
+Scribe — AI assistant for meetings that goes beyond note-taking and actually does your work while on the call.
+
+About the role
+
+As a QA Engineer II you will own test strategy and automation for the features you work on, partnering closely with developers and product to keep quality high as we ship fast.
+
+We are proponents of leveraging best-in-breed AI tools at every step of the engineering lifecycle — design, development, review, and testing. This requires a different engineering mindset: a lean team of senior, hands-on, AI-adept engineers, resulting in ultra-rapid iteration cycles and fast output. You will work within this approach, from design through to production.
+
+This is a step up from an entry-level QA role: you're expected to design test strategy independently and build automation others can rely on, without yet owning the standards for a whole team.
+
+Job Location
+
+Bangalore, India (100% on-site)
+
+Responsibilities
+
+Test strategy & design
+
+Design test plans and test cases for the features you work on, in partnership with the developers and PMs building them.
+Validate quality across web, API, and mobile surfaces, catching gaps before they reach production.
+
+Automation development
+
+Build and extend automated test solutions across web, API, and mobile using tools like RestAssured, Apache HttpClient, Unirest, OkHttp, and Appium.
+Apply solid framework design (Factory, Builder patterns) so automation stays maintainable and extensible as coverage grows.
+
+Shift-left & quality gates
+
+Contribute quality input across design, development, deployment, and post-release — not just at the test-execution stage.
+Help define the quality gates a code change must pass, and flag issues early enough to fix cheaply.
+
+Performance & metrics
+
+Run performance tests using tools like Apache JMeter and set up the environments they need.
+Track quality metrics for your area, spot trends, and raise issues before they become incidents.
+
+Agent leverage & collaboration
+
+Use AI coding assistants to speed up test creation, script maintenance, and debugging.
+Work within Agile ceremonies, log defects and coverage clearly in tools like Jira and TestRail, and communicate testing status to developers and PMs.
+
+Skills
+
+AI-native engineering practice — Uses AI coding assistants fluently to accelerate test script creation, maintenance, and root-cause analysis during debugging.
+API & automation — Hands-on experience building automated tests with RestAssured, Apache HttpClient, Unirest, or OkHttp, and mobile automation with Appium.
+Framework design — Comfortable applying design patterns (Factory, Builder) to keep automation frameworks maintainable and extensible across web, API, and mobile.
+Performance testing — Practical experience with Apache JMeter, including setting up and tuning the test environment.
+Tooling — Working knowledge of TestRail for test management, Jira or Redmine for defect tracking, an IDE (IntelliJ, Eclipse, Visual Studio, or Xcode), and log analysis with Kibana, New Relic, or similar.
+Testing depth — Comfortable going beyond black-box testing — understands software internals well enough to debug issues, and applies white-box testing and TDD where it fits.
+Agile collaboration — Works effectively within Agile teams, contributing to test strategy, planning, design, and execution across the product lifecycle.
+
+Experience & Qualifications
+
+3-5 years of experience as a QA Engineer.
+BTech in Computer Science or equivalent technical field.
+Strong communication and collaboration skills, with hands-on automation experience across API, web, and mobile testing.
+
+Equal Opportunity
+
+Neo is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees. We encourage applicants from all backgrounds, cultures, and communities to apply and believe that a diverse workforce is key to our success.
+
+… more"
+"Accenture in India","Test Automation Engineer","Project Role : Test Automation Engineer
+
+Project Role Description : Use quality processes, automation tools, and methodologies to transform testing products and solutions. Run end-to-end quality engineering function with a focus on automation to improve control, accuracy and integrity.
+
+Must have skills : Test Automation Strategy
+
+Good to have skills : NA
+
+Minimum 5 Year(s) Of Experience Is Required
+
+Educational Qualification : 15 years full time education
+
+QA/Test Engineer:
+
+Role Overview
+
+Responsible for ensuring the quality, reliability, and performance of automotive software applications, digital products, and enterprise platforms through manual and automated testing.
+
+Key Responsibilities
+
+Analyze business and functional requirements and create test scenarios and test cases.
+
+Perform functional, integration, system, regression, and end-to-end testing.
+
+Design, develop, and maintain test automation frameworks.
+
+Execute automated test scripts and analyze results.
+
+Identify, log, track, and retest defects using defect management tools.
+
+Collaborate with developers, product owners, and business stakeholders in Agile/Scrum teams.
+
+Conduct API testing and backend validation.
+
+Participate in CI/CD pipeline integration for automated testing.
+
+Prepare test reports, quality metrics, and release sign-off documentation.
+
+Ensure compliance with quality standards and best practices.
+
+Required Skills
+
+Testing
+
+Manual Testing
+
+Functional Testing
+
+Regression Testing
+
+Integration Testing
+
+System Testing
+
+UAT Support
+
+Automation
+
+Selenium WebDriver
+
+Java/Python
+
+TestNG/JUnit
+
+Cucumber/BDD
+
+REST Assured
+
+API & Database Testing
+
+Postman
+
+REST APIs
+
+SQL and Database Validation
+
+DevOps & Tools
+
+Jira
+
+Confluence
+
+Git/GitHub
+
+Jenkins
+
+CI/CD Pipelines
+
+Agile
+
+Scrum methodology
+
+Sprint planning and defect triage
+
+Test estimation and reporting
+… more"
+"Thermo Fisher Scientific","Senior Test Engineer","Work Schedule
+
+Other
+
+Environmental Conditions
+
+Office
+
+Summarized Purpose:
+
+We are offering an outstanding opportunity to join Thermo Fisher Scientific as a Engineer III, Software Quality Assurance. In this role, you will drive testing initiatives through advanced manual testing practices on advanced projects ranging from generative AI applications to clinical trial technology, partnering with cross-functional teams to deliver result.
+
+Education/Experience:
+
+Bachelor’s degree or equivalent.
+5–7 years of experience in software testing.
+Industry certifications such as ISTQB, CSTAS, or CPTA are advantageous
+
+Major Job Responsibilities:
+
+Experience with API testing, backend validation, and database testing.
+Expertise in programming languages such as Python, Java, or JavaScript.
+Strong knowledge of Agile methodologies and DevOps practices.
+Experience with CI/CD tools (Jenkins, Azure DevOps, GitHub).
+Proficiency in test management tools (JIRA, ALM, qTest)
+Experience with cloud platforms (AWS, Azure) and microservices architecture
+Strong analytical and problem-solving abilities
+Excellent communication and collaboration skills
+Knowledge of GxP compliance and software validation in regulated environments.
+Experience with performance testing tools (JMeter, LoadRunner)
+Ability to work independently and lead testing initiatives
+Strong documentation and reporting skills
+Design and implement comprehensive test strategies
+Lead test planning, execution, and defect management
+Perform API and data validation testing
+Mentor junior engineers and provide technical guidance
+Collaborate with stakeholders to improve product quality
+
+Knowledge, Skills, and Abilities:
+
+Strong expertise in manual testing and QA processes
+Experience with API, integration, and data testing
+Proficiency in SQL and data validation
+Familiarity with Agile and CI/CD environments
+
+Must Have Skills:
+
+Strong manual testing expertise
+API and integration testing
+SQL/data validation
+Agile methodologies
+
+Good to Have Skills:
+
+Exposure to automation testing
+Performance testing knowledge
+Domain expertise (Healthcare/Life Sciences)
+
+Working Hours:
+
+India: 05:30 PM to 02:30 AM IST
+Philippines: 08:00 PM to 05:00 AM PHT
+
+… more"
+"Siemens Digital Industries Software","Software QA Engineer - Advanced, Test Automation & AI","We are Siemens
+
+Siemens Digital Industries Software is a leading provider of solutions for the design, simulation, and manufacture of products across many different industries. Formula 1 cars, skyscrapers, ships, space exploration vehicles, and many of the objects we see in our daily lives are being conceived and manufactured using our software.
+
+We are looking for an experienced Software QA Engineer with strong expertise in test automation, API testing, and modern quality engineering practices to help ensure the reliability and quality of our software products.
+
+In this role, you will design and implement automated testing solutions across functional, regression, integration, API, and end-to-end scenarios. You will work closely with Product Management, Software Development, Quality Engineering, and other stakeholders to define effective test strategies and integrate automated testing into CI/CD pipelines.
+
+The role also provides an opportunity to work with AI-agent-driven workflows, LLM-based applications, knowledge graph technologies, and modern test automation approaches.
+
+The ideal candidate combines strong programming and automation skills with analytical thinking, problem-solving ability, curiosity, and a strong quality mindset.
+
+Key Responsibilities
+
+Design and develop test automation: Build, maintain, and enhance automated test frameworks and scripts for functional, regression, integration, and end-to-end testing using appropriate tools and programming languages.
+Drive end-to-end quality: Partner with Product Managers, Developers, Quality Engineers, and business stakeholders to understand workflows, define test strategies, identify risks, and ensure comprehensive test coverage for new features and releases.
+Automate continuous testing: Integrate automated tests into CI/CD pipelines to provide continuous feedback, accelerate defect detection, and improve release confidence.
+Test APIs, data, and integrations: Design and execute automated tests for RESTful APIs, validate database results, and work with structured data and SPARQL queries for RDF/knowledge-graph-based applications.
+Test AI and agentic workflows: Develop testing approaches for AI-agent-driven workflows and LLM-based applications, evaluating functional behavior, workflow reliability, accuracy, and expected outcomes.
+Investigate and communicate quality issues: Execute automated tests, analyze results, identify root causes, document defects, and collaborate with development teams to drive timely resolution.
+Continuously improve automation: Enhance existing frameworks, expand automation coverage, improve maintainability and execution efficiency, and maintain clear documentation for test assets, results, and processes.
+
+Qualifications
+
+5+ years of experience in Software Quality Assurance / Software Testing, with strong hands-on experience in test automation.
+Strong programming skills in Java, Python, JavaScript/TypeScript, or a similar programming language, with the ability to develop maintainable automation solutions.
+Extensive experience with test automation frameworks and tools, such as Selenium, Playwright, Cypress, Katalon Studio, PyTest, TestNG, JUnit, or equivalent.
+Strong experience with API testing and automation, including RESTful APIs, tools such as Postman/Swagger, and database validation.
+Experience writing, optimizing, and validating SPARQL queries, including validating data accuracy and query results for RDF/knowledge graph-based applications.
+Hands-on experience with Git and CI/CD tools such as Jenkins, GitLab CI, CircleCI, or equivalent, including integrating automated tests into pipelines.
+Strong understanding of software testing methodologies such as Agile, Scrum, TDD, BDD, along with excellent analytical, problem-solving, communication, and collaboration skills.
+
+Preferred Skills
+
+Experience testing AI-agent-driven workflows, LLM-based applications, or Generative AI solutions, including familiarity with tools such as Anthropic Claude or similar technologies.
+Experience with AI-agent orchestration frameworks and evaluation approaches.
+Familiarity with AWS, Azure, or GCP.
+Experience with Docker and Kubernetes.
+Performance testing experience using tools such as JMeter or LoadRunner.
+Familiarity with security testing practices, including DAST and penetration testing concepts.
+Experience testing browser-based applications across functionality, performance, and cross-browser compatibility.
+Experience with Data Science, Data Visualization, Data Analytics, RDF, or Knowledge Graph technologies.
+Experience with test management and defect tracking tools such as JIRA, X-Ray, TestRail, or Zephyr.
+
+Why Us
+
+At Siemens Software, flexibility is how we work - hybrid by default, built on trust and autonomy. Together, 30,000 people across more than 200 countries build technology that shapes the real world. You'll grow through real projects, strong technical peers, and global mobility, backed by the scale and benefits of an industrial software leader. We're committed to equality and inclusion, and we hire based on merit, skills, and impact. Bring your curiosity and creativity and help us shape tomorrow!
+
+Diversity & Inclusion
+
+We value equal opportunities and welcome applications from people with disabilities. At Siemens, we believe people who've had real experiences dealing with being different will excel as leaders. Let's foster a culture of creativity and innovation. We will ensure that individuals with disabilities are provided reasonable accommodation to participate in the job application or interview process, to perform essential job functions, and to receive other benefits and privileges of employment. Please contact us to request accommodation.
+
+Siemens Software. Transform the Everyday
+
+#DISWSIM
+
+… more"
+"Pearson","Quality Assurance Engineer III","SUMMARY
+
+The Sr Software Quality Engineer is a hands-on daily contributor who performs complex testing tasks requiring planning, scheduling, and testing to assure that developed products meet design specifications and are within total quality management limits and standards. They will communicate with product, developers and technical support specialists on product issues; operate under general supervision and report to the Software Quality Engineering Manager. This position requires five to eight years of experience in software quality engineering and a strong automation background.
+
+DUTIES AND RESPONSIBILITIES
+
+Guides the planning, creation and execution of automated tests using a test automation tool including, but not limited to, RestAssured & Selenium. Understands the concepts behind and when to do automation.
+
+Has demonstrated lead capabilities: lead a team successfully, worked well with other departments – Dev/PM/PdM, etc. Contributes to the development of other team members. Has demonstrated planning and resource scheduling skills. Facilitates troubleshooting and solves problems.
+
+Understands API/Web Services testing and understanding when to write test harnesses using web services technologies and is able to disseminate this information to team members.
+
+Leads, plans, schedules and implements testing for projects, defines test objectives, writes scripts (manual and automated). Formulates test plans including systems analysis, risk analysis, dependency analysis, writing and plotting test strategies, and determines how to report defects (pre/post- production).
+
+Executes manual and automated test cases, as well as performs back end data validation.
+
+Tracks test progress and results in test management tools like Jira, Greenhopper, Stash, Perforce and Testlink.
+
+Identifies opportunities, then leads the roll out of inventive tech ideas and implements solutions with other projects teams, the SQE department, as well as other departments.
+
+Other duties as assigned.
+
+EDUCATION and/or EXPERIENCE
+
+Software Quality Engineering experience including web application testing - including functional, systems integration testing, automation, performance, security
+
+Expert programming in several high level languages (Java, C#, C++, Perl)
+
+Extensive experience with RestAssured and/or Selenium for web page testing
+
+Ability to communicate effectively with management at all levels relative to test requirements, strategies, approaches and results
+
+Bachelor’s degree in Computer related field preferred with five (5) to eight (8) years experience and/or equivalent work experience. Experience leading and mentoring multiple teams and projects required; or equivalent education and experience to successfully perform the essential duties of the job.
+
+KNOWLEDGE, SKILLS AND ABILITIES
+
+Must Have:
+
+Strong practical QA principles and practices foundation including test strategy, planning, execution and automation
+
+Familiarity with automated testing tools (HP LoadRunner, QuickTest Pro, Selenium). Preferred but not required: Fiddler, Soap UI Pro
+
+Ability to define, organize, implement, and execute testing processes within the test team
+
+Ability to lead deep dives after iteration planning and hold team accountable for deliverables
+
+Excellent leadership skills
+
+Ability to work independently and mostly in a team based environment
+
+Ability to work efficiently in a fast paced environment
+
+Ability to work under pressure and in high stress situations
+
+Who we are:
+
+At Pearson, our purpose is simple: to help people realize the life they imagine through learning. We believe that every learning opportunity is a chance for a personal breakthrough. We are the world's lifelong learning company. For us, learning isn't just what we do. It's who we are. To learn more: We are Pearson.
+
+Pearson is an Equal Opportunity Employer and a member of E-Verify. Employment decisions are based on qualifications, merit and business need. Qualified applicants will receive consideration for employment without regard to race, ethnicity, color, religion, sex, sexual orientation, gender identity, gender expression, age, national origin, protected veteran status, disability status or any other group protected by law. We actively seek qualified candidates who are protected veterans and individuals with disabilities as defined under VEVRAA and Section 503 of the Rehabilitation Act.
+
+If you are an individual with a disability and are unable or limited in your ability to use or access our career site as a result of your disability, you may request reasonable accommodations by emailing TalentExperienceGlobalTeam@grp.pearson.com.
+
+Job: Engineering
+
+Job Family: TECHNOLOGY
+
+Organization: Virtual Learning
+
+Schedule: FULL_TIME
+
+Workplace Type: Hybrid
+
+Req ID: 24519
+
+… more"
+"Tekion Corp","Senior Software Development Test Engineer - AI","About Tekion
+
+Positively disrupting an industry that has not seen any innovation in over 50 years, Tekion has challenged the paradigm with the first and fastest cloud-native automotive platform that includes the revolutionary Automotive Retail Cloud (ARC) for retailers, Automotive Enterprise Cloud (AEC) for manufacturers and other large automotive enterprises and Automotive Partner Cloud (APC) for technology and industry partners. Tekion connects the entire spectrum of the automotive retail ecosystem through one seamless platform. The transformative platform uses cutting-edge technology, big data, machine learning, and AI to seamlessly bring together OEMs, retailers/dealers and consumers. With its highly configurable integration and greater customer engagement capabilities, Tekion is enabling the best automotive retail experiences ever. Tekion employs close to 3,000 people across North America, Asia and Europe.
+
+About The Role
+
+We are looking for highly motivated Senior AI Software Development Engineers in Test (AISDET) to join Tekion’s ML Engineering team. Our team builds and ships the machine learning
+
+models and AI agents that power the Automotive Retail Cloud (ARC) — from Service AI Agents and F&I automation to the AI-powered Analytics Agent — trained on real-time data spanning 1,700+ dealership rooftops.
+
+In this role, you will be responsible for building confidence in the quality, correctness, and reliability of the models and AI agents we deliver. You will work closely with ML Engineers, Data
+
+Scientists, the AI Platform team, Product Management, and Applied AI teams to define robust validation strategies, automate testing across the model lifecycle, and ensure our AI features meet the highest quality bar before they reach dealers and their customers.Because you are testing AI systems, you will go beyond deterministic assertions: you will design
+
+evaluation frameworks for non-deterministic model and agent outputs, measure accuracy and consistency, catch hallucinations and regressions, and continuously expand coverage. You will also use AI and LLMs yourself — to generate test cases, synthetic data, and automation scaffolding — raising both the speed and the depth of quality engineering.
+
+What You’ll Do
+
+Develop a deep understanding of Tekion’s AI agents, ML models, business domains, and the data that feeds them.
+Own end-to-end quality for the ML models, AI agents, and AI-powered features shipped by the ML Engineering team.
+Design and implement automated testing frameworks for model inference, prompt pipelines, agentic workflows, RAG/retrieval systems, and the APIs that serve them.
+Validate model correctness, accuracy, latency, and behavioral consistency across model versions, prompt changes, and upgrades.
+Define and execute evaluation strategies for AI/LLM-powered capabilities by:
+Creating and curating evaluation datasets (evals) and ground-truth sets
+Measuring response accuracy, relevance, and consistency
+Identifying hallucinations, unsafe outputs, and edge cases
+Building LLM-as-judge and automated scoring pipelines
+Continuously improving evaluation coverage as models and agents evolve
+Use AI/LLMs to accelerate quality engineering — generating test cases, synthetic test data,and automation scaffolding.
+Build regression suites that detect quality drift when models, prompts, embeddings, or training data change.
+Validate integration of ML models and agents into ARC products, including end-to-end flows and fallback behavior.
+Drive root cause analysis for production model and behavioral issues, and partner with ML Engineers on preventive improvements.
+Define quality metrics, guardrails, and automated monitoring to detect model degradation before it impacts customers.
+Champion quality and evaluation engineering best practices across the ML Engineering organization.
+
+What We’re Looking For
+
+5–8 years in SDET, quality engineering, or software engineering, with a strong track recordof building test automation frameworks.
+Strong programming skills in Python (preferred for ML tooling) and/or Java, with the ability to write production-quality automation code.
+Hands-on experience testing data-intensive or ML/AI systems — or a strong softwaretesting background with demonstrated ML/LLM fluency.
+Solid understanding of ML concepts: model training and inference, evaluation metrics (precision/recall, F1, etc.), and the non-deterministic nature of model outputs.
+Experience designing evaluation frameworks, or working with eval datasets, benchmarks, or LLM-as-judge approaches.
+Familiarity with LLM/agent concepts — prompting, RAG, embeddings, vector search — and generative failure modes (hallucination, drift, prompt sensitivity).
+Experience with CI/CD, test orchestration, and API/integration testing.
+Strong analytical and debugging skills; comfortable performing root cause analysis across model, data, and code layers.
+Excellent collaboration and communication skills to partner across ML, data, and product teams.
+
+Nice to Have
+
+Experience with ML/eval tooling such as MLflow, Weights & Biases, LangSmith, Ragas, DeepEval, or provider eval suites.
+Experience with cloud platforms (AWS/GCP/Azure) and containerized environments (Docker, Kubernetes).
+Exposure to model observability, drift detection, and production ML monitoring.
+Experience testing agentic systems, tool use, or multi-step LLM workflows.
+Prior experience in a high-scale SaaS or data platform environment.
+
+Effective 4 Aug 2026, Current Tekion Employees should apply via the Internal Job Board in Ashby
+
+Tekion is proud to be an Equal Employment Opportunity employer. We do not discriminate based upon race, religion, color, national origin, gender (including pregnancy, childbirth, or related medical conditions), sexual orientation, gender identity, gender expression, age, status as a protected veteran, status as an individual with a disability, victim of violence or having a family member who is a victim of violence, the intersectionality of two or more protected categories, or other applicable legally protected characteristics.
+
+For more information on our privacy practices, please refer to our Applicant Privacy Notice here.
+
+… more"
+"Glean","Quality Assurance Engineer","About Glean
+
+Glean is the Work AI platform that helps everyone work smarter with AI. What began as the industry’s most advanced enterprise search has evolved into a full-scale Work AI ecosystem, powering intelligent Search, an AI Assistant, and scalable AI agents on one secure, open platform. With over 100 enterprise SaaS connectors, flexible LLM choice, and robust APIs, Glean gives organizations the infrastructure to govern, scale, and customize AI across their entire business - without vendor lock-in or costly implementation cycles.
+
+At its core, Glean is redefining how enterprises find, use, and act on knowledge. Its Enterprise Graph and Personal Knowledge Graph map the relationships between people, content, and activity, delivering deeply personalized, context-aware responses for every employee. This foundation powers Glean’s agentic capabilities - AI agents that automate real work across teams by accessing the industry’s broadest range of data: enterprise and world, structured and unstructured, historical and real-time. The result: measurable business impact through faster onboarding, hours of productivity gained each week, and smarter, safer decisions at every level.
+
+Recognized by Fast Company as one of the World’s Most Innovative Companies (Top 10, 2025), by CNBC’s Disruptor 50, Bloomberg’s AI Startups to Watch (2026), Forbes AI 50, and Gartner’s Tech Innovators in Agentic AI, Glean continues to accelerate its global impact. With customers across 50+ industries and 1,000+ employees in more than 25 countries, we’re helping the world’s largest organizations make every employee AI-fluent, and turning the superintelligent enterprise from concept into reality.
+
+If you’re excited to shape how the world works, you’ll help build systems used daily across Microsoft Teams, Zoom, ServiceNow, Zendesk, GitHub, and many more - deeply embedded where people get things done. You’ll ship agentic capabilities on an open, extensible stack, with the craft and care required for enterprise trust, as we bring Work AI to every employee, in every company.
+
+About The Role
+
+Glean is building a modern knowledge assistant personalized to every employee in your organization, making all information within your company accessible, contextual, and fresh. Our team works hard and plays hard. We are professional, creative, passionate, and most importantly - customer-obsessed.
+
+We are looking for a Quality Assurance Engineer to assess the quality of our web application through Manual & Automation testing. You will be responsible for finding and reporting bugs and glitches with the initial level of RCA. You should have a keen eye for detail and excellent communication skills.
+
+You Will
+
+Create, Execute and Maintain test plans thoroughly to qualify product releases and features
+Do initial RCA on bugs found using developer tools - network and console tabs, GCP server logs, SQL analysis etc
+Report bugs and errors using Jira with in depth details to help engineering team identify and fix the issue
+Help reproduce bugs raised externally
+Execute extended/edge cases around the main use case to help evolve the test plans
+Work with development team to keep Test plans up to date with new changes
+Contribute to the existing automation framework. Triage and fix failing tests and keep them up to date with product changes
+
+About You
+
+Proven 2+ years of experience as a Automation and Manual Tester, testing responsive web pages
+Experience in testing on different OS platforms and browsers
+Experience in testing RBAC/permission models a plus
+Working experience with tools like Jira, Chrome Developer tools etc. to report and troubleshoot errors
+Strong knowledge of web based applications workings
+Strong organisational skills and thoroughness in executing test plans
+Attention to detail and an analytical mind to come up with hard to find edge cases
+Experience working in agile teams with multiple product releases per week
+Comfortable working with Python or Java, Exposure to REST APIs is a plus
+Excellent communication skills
+Experience in testing mobile applications a plus
+BE/BTech/BSc in Computer Science, Engineering or a related field
+
+Location:
+
+This role is hybrid (4 days a week in our Bangalore office)
+
+Compensation & Benefits
+
+Compensation offered will be determined by factors such as location, level, job-related knowledge, skills, and experience. Certain roles may be eligible for variable compensation, equity, and benefits.
+
+We are a diverse bunch of people and we want to continue to attract and retain a diverse range of people into our organization. We're committed to an inclusive and diverse company. We do not discriminate based on gender, ethnicity, sexual orientation, religion, civil or family status, age, disability, or race.
+
+AI-First Mindset At Glean
+
+At Glean, AI fluency is core to how we work and we're committed to ensuring every new hire feels confident integrating AI into their everyday work. As part of the interview process, you'll complete a brief AI-focused exercise or discussion so we can understand how you think about, design, and use AI to drive impact in your role. Feel free to reference any tools, platforms, or workflows you use today — prior Glean experience isn't required.
+
+Global Data Privacy Notice For Job Candidates And Applicants
+
+Depending on your location, the General Data Protection Regulation (GDPR), California Consumer Privacy Act (CCPA), or other privacy laws may regulate the way we manage the data of job applicants. Our full notice outlining how data will be processed as part of the application procedure for applicable locations is available in our Privacy Policy. By submitting your application, you are agreeing to our use and processing of your data as required. US applicants and their applications are subject to arbitration of disputes as outlined in our Applicant Arbitration Agreement.
+
+By clicking “Submit Application,” I confirm that I have read the Global Data Privacy Notice and the Applicant Arbitration Agreement, and I agree to the terms.
+
+… more"
+"Centric Software","AI Engineer","About Centric Software
+
+Centric Software® is a global leader, providing an innovative and AI-enabled product-concept-to-commercialization platform for retailers, brands and manufacturers of all sizes. We equip retail, fashion, luxury, footwear, outdoor, home and consumer goods brands with pioneering best-of-breed solutions to plan, design, develop, source, comply, buy, make, price, allocate, sell and replenish products. Our technology powers brands to streamline processes, drive efficiency and operate with confidence in an ever-changing market.
+
+Our story is one of rapid growth, bold ideas and extraordinary opportunities. We’re here to challenge the status quo—and we’re looking for brilliant people who want to do the same. No matter where you are in the world, this is your chance to be part of something exceptional.
+
+AI Engineer – QA & Regression
+
+About The Role
+
+We are seeking an experienced AI Engineer – QA & Regression with 3–5 years of experience in software quality assurance and test automation to support quality validation across our AI-enabled application landscape. This role combines traditional QA practices with AI-driven testing methodologies to help ensure the quality, reliability, and scalability of modern cloud-based applications.
+
+The ideal candidate will have hands-on experience in manual testing, regression validation, API testing, and test automation, along with an interest in leveraging AI-powered tools and automation frameworks to improve testing efficiency and coverage.
+
+Required Qualifications
+
+Bachelor’s degree in Computer Science, Information Technology, Engineering, or a related field (or equivalent practical experience).
+3–5 years of experience in Software Quality Assurance, Quality Engineering, or Test Automation roles.
+Strong understanding of software testing methodologies, SDLC, and QA best practices.
+Hands-on experience performing manual, functional, integration, and regression testing.
+Experience with defect tracking and test management tools such as Jira, Azure DevOps, TestRail, or similar.
+Experience with API testing using Postman, Swagger, REST Assured, or similar tools.
+Strong analytical, troubleshooting, and communication skills.
+Experience working in Agile/Scrum environments.
+
+Preferred Qualifications
+
+Hands-on experience with test automation frameworks such as Selenium, Playwright, Cypress, or Robot Framework.
+Experience building and maintaining automated regression test suites.
+Exposure to AI-assisted testing platforms, intelligent test generation, or self-healing automation frameworks.
+Working knowledge of Python, Java, JavaScript, or similar programming languages.
+Familiarity with CI/CD pipelines and automated testing practices.
+Experience testing cloud-based and AI-enabled applications.
+
+What You’ll Gain
+
+Opportunity to work on AI-enabled applications and emerging AI-driven testing technologies.
+Exposure to modern QA automation frameworks and cloud-native application environments.
+Collaboration with product, engineering, and AI teams to deliver high-quality software solutions.
+Opportunity to contribute to QA modernization and intelligent testing initiatives.
+
+Centric Software provides equal employment opportunities to all qualified applicants without regard to race, sex, sexual orientation, gender identity, national origin, color, age, religion, protected veteran or disability status or genetic information.
+… more"
+"Kapiva","Software Engineer in Test -II","About Kapiva
+
+Kapiva (Series-C funded) is on a journey of transformation — from being one of India’s leading modern Ayurvedic nutrition brands to becoming a health-tech company that leverages technology to drive better health outcomes for millions of people across India and internationally.
+
+We believe the next wave of innovation in health will be driven by AI-first solutions — from personalized recommendations and intelligent coaching, to automated platforms that scale care and wellness delivery. At Kapiva, you’ll be part of building this future.
+
+Role Summary
+
+We are looking for a SDET-2 (Software Development Engineer in Test) with 2–4 years of experience in test automation to strengthen our QA engineering team. As an SDET-2, you will design, implement, and execute automation scripts across web, mobile, and API platforms for both Ecommerce and Health Tech applications. You will work closely with senior SDETs and developers to contribute to frameworks, improve coverage, and enhance the overall quality of Kapiva’s products. This is a hands-on role where you will build and scale automation while ensuring fast, reliable, and high-quality releases.
+
+Key Responsibilities
+
+Analyze requirements, specifications, and design documents to create comprehensive test cases.
+Design, develop, and execute automation scripts across: Web (Cypress/Playwright), Mobile (Appium), APIs (RestAssured, Pytest, Postman/Newman)
+Contribute to building and extending test automation frameworks.
+Ensure strong automated coverage for Ecommerce flows (checkout, subscriptions, payments, promotions, personalization) and Health Tech flows (consultations, patient journeys, doctor dashboards).
+Execute regression, functional, and integration testing, ensuring quality releases.
+Debug, identify, and report issues with clear documentation.
+Collaborate with developers and product managers to ensure testability of features.
+Maintain and update automation scripts to keep pace with evolving product features.
+Participate in Agile ceremonies and support shift-left testing practices.
+Share knowledge with junior team members and contribute to a culture of quality.
+
+Required Skills and Qualifications
+
+2–4 years of experience in software testing and test automation.
+Strong knowledge of QA methodologies, tools, and processes.
+Hands-on experience with automation frameworks like Cypress/Playwright for web and Appium for mobile.
+Experience in API testing/automation (RestAssured, Pytest, Postman/Newman).
+Solid understanding of SQL and database testing.
+Experience working with Agile/Scrum development processes.
+Ability to write clear and structured test cases, test plans, and defect reports.
+B Tech/M Tech degree in Computer Science, Engineering, or related field.
+
+Bonus Points
+
+Programming knowledge in JavaScript/TypeScript or Python for advanced test automation.
+Experience in Ecommerce or Health Tech domain testing.
+exposure to CI/CD pipelines and cloud environments (AWS/GCP).
+Familiarity with performance testing (JMeter, Locust).
+Interest in contributing to tools that improve QA/developer productivity
+
+What We Offer
+
+Opportunity to work on cutting-edge Ecommerce and Health Tech platforms at scale.
+Hands-on learning and mentorship from senior engineers (SDET-3 and beyond).
+Exposure to automation frameworks, CI/CD pipelines, and cloud-based QA practices.
+A culture of collaboration, ownership, and continuous improvement.
+Competitive compensation and growth opportunities
+
+… more"
+"AVEVA","R&D Senior Member of Technical Staff, Product Test","AVEVA is creating software trusted by over 90% of leading industrial companies.
+
+Job Title: Senior Software Test Engineer
+
+Location: Bengaluru, India
+
+Employment Type: Full-time, hybrid work arrangement
+
+The job
+
+We are seeking a self-driven Senior Test Engineer with expertise in test automation and cloud-based testing. You will design and maintain automated test frameworks, contribute to manual testing, and collaborate with developers and architects in a Scrum team. This role requires strong technical skills, ownership, and a QA mindset to ensure the quality and scalability of business-critical applications.""
+
+Key Responsibilities
+
+Analyze business and technical requirements to create comprehensive test plans, test cases, and test scripts.
+Perform functional, regression, integration, system, performance, security, and user acceptance testing (UAT).
+Execute manual and automated test cases to ensure applications meet business requirements and quality standards.
+Identify, document, and track software defects, and work closely with developers to resolve them.
+Validate APIs, services, and database interactions related to .NET applications.
+Provide early feedback in the development lifecycle to reduce defects and improve design.
+Collaborate with developers and architects to establish service-level expectations.
+
+Essential Requirements
+
+Strong analytical, problem-solving, and programming skills.
+Proficiency in C# and object-oriented programming.
+Hands-on experience with test automation frameworks and tools such as MSTest, NUnit, TestComplete, and Playwright preferred.
+Experience with web services and API test automation (Postman, Swagger, or similar).
+Experience with development tools: Visual Studio, TFS/Azure DevOps, Fiddler, Code Review, Code Coverage.
+
+Desired Skills And Competencies
+
+Adaptability: Strong willingness to learn and adjust to new domains, tools, and ways of working.
+Continuous Learning: Curious and eager to change, explore, and acquire new knowledge and skills.
+Team Impact: Applies learning and adaptability to contribute effectively and positively to the team.
+
+R&D at AVEVA
+
+Our global team of 2000+ developers work on an incredibly diverse portfolio of over 75 industrial automation and engineering products, which cover everything from data management to 3D design. AI and cloud are at the centre of our strategy, and we have over 150 patents to our name.
+
+Our track record of innovation is no fluke – it’s the result of a structured and deliberate focus on learning, collaboration and inclusivity. If you want to build applications that solve big problems, join us.
+
+Find out more: aveva.com/en/about/careers/r-and-d-careers/
+
+India Benefits include:
+
+Gratuity, Medical and accidental insurance, very attractive leave entitlement, emergency leave days, childcare support, maternity, paternity and adoption leaves, education assistance program, home office set up support (for hybrid roles), well-being support
+
+It’s possible we’re hiring for this position in multiple countries, in which case the above benefits apply to the primary location. Specific benefits vary by country, but our packages are similarly comprehensive.
+
+Find out more: aveva.com/en/about/careers/benefits/
+
+Hybrid working
+
+By default, employees are expected to be in their local AVEVA office three days a week, but some positions are fully office-based. Roles supporting particular customers or markets are sometimes remote.
+
+Hiring process
+
+Interested? Great! Get started by submitting your cover letter and CV through our application portal. AVEVA is committed to recruiting and retaining people with disabilities. Please let us know in advance if you need reasonable support during your application process.
+
+Find out more: aveva.com/en/about/careers/hiring-process
+
+About AVEVA
+
+AVEVA is a global leader in industrial software with more than 6,500 employees in over 40 countries. Our cutting-edge solutions are used by thousands of enterprises to deliver the essentials of life – such as energy, infrastructure, chemicals, and minerals – safely, efficiently, and more sustainably.
+
+We are committed to embedding sustainability and inclusion into our operations, our culture, and our core business strategy. Learn more about how we are progressing against our ambitious 2030 targets: sustainability-report.aveva.com/
+
+Find out more: aveva.com/en/about/careers/
+
+AVEVA requires all successful applicants to undergo and pass a drug screening and comprehensive background check before they start employment. Background checks will be conducted in accordance with local laws and may, subject to those laws, include proof of educational attainment, employment history verification, proof of work authorization, criminal records, identity verification, credit check. Certain positions dealing with sensitive and/or third-party personal data may involve additional background check criteria.
+
+AVEVA is an Equal Opportunity Employer. We are committed to being an exemplary employer with an inclusive culture, developing a workplace environment where all our employees are treated with dignity and respect. We value diversity and the expertise that people from different backgrounds bring to our business. AVEVA provides reasonable accommodation to applicants with disabilities where appropriate. If you need reasonable accommodation for any part of the application and hiring process, please notify your recruiter. Determinations on requests for reasonable accommodation will be made on a case-by-case basis.
+… more"
+"Arctic Wolf","Staff Quality Engineer - AI SOC","At Arctic Wolf, you will not just watch the cybersecurity industry evolve – you will help lead the change. Our global team is made up of people who thrive on solving complex problems, moving quickly, and building technology that protects organizations around the world. We are proud to be recognized by Forbes, CNBC, Fortune, CRN, Gartner Peer Insights, and International Data Corporation MarketScape. What matters most is the work behind these recognitions: delivering real outcomes for customers through award-winning innovation such as our Aurora Platform.
+
+If you are looking for meaningful work, smart teammates, and the opportunity to make a real impact in a high-growth company that is redefining security operations, Arctic Wolf is the right place for you.
+
+Our mission is simple: End Cyber Risk.
+
+We are looking for a Staff Quality Engineer - Artificial Intelligence to help achieve this mission.
+
+The Staff Quality Engineer will contribute to our Engineering organization by building scalable automation frameworks and quality engineering solutions for artificial intelligence, machine learning, and cybersecurity applications. This role will focus on ensuring reliability, scalability, performance, and quality across distributed systems, cloud-native services, and large language model-driven applications. The Arctic Wolf security operations platform ingests and processes more than 600 billion events per day from a wide variety of on-premises devices and cloud platforms. The security pipeline is a distributed system of loosely coupled microservices that power real-time analysis and threat detection systems. These services transform incoming events into actionable intelligence used by Arctic Wolf Security Services teams to help protect customers.
+
+In This Role, You Will
+
+Create and extend software frameworks and tools to execute, monitor, and report on automated tests
+Build and maintain automation frameworks and continuous integration and continuous delivery pipelines
+Review testing strategies, approaches, and test plans while providing guidance to development teams
+Architect, design, and build automation solutions for application programming interface validation, performance testing, load testing, and fuzz testing
+Develop and maintain testing frameworks for generative artificial intelligence and machine learning applications
+Validate model behavior, prompt-response consistency, hallucination detection, and regression testing for artificial intelligence inference application programming interfaces
+Implement evaluation pipelines to measure large language model accuracy, latency, bias, toxicity, and reliability
+Collaborate with highly skilled software engineering professionals across teams
+Continuously improve engineering quality, automation practices, and testing methodologies
+Learn and adopt emerging technologies in artificial intelligence, cybersecurity, cloud engineering, and distributed systems
+
+Our Technology Stack Includes
+
+Selenium
+Playwright
+Docker
+Kubernetes
+Amazon Web Services including Bedrock, Lambda, Simple Queue Service, and Simple Storage Service
+LangChain
+Large language model evaluation frameworks such as Ragas
+OpenAPI
+PostgreSQL
+Linux
+
+You Will Be Successful In This Role If
+
+You are excited to work at the intersection of artificial intelligence, machine learning, big data, and cybersecurity
+You have more than 10+ years of experience delivering high-quality software solutions
+You are passionate about driving software quality through automation and testing
+You have experience deploying services on cloud computing platforms such as Amazon Web Services, Microsoft Azure, or Google Cloud Platform
+You have strong expertise with tools used for functional testing, load testing, and fuzz testing such as Locust and CATS
+You have experience building automation frameworks and continuous integration and continuous delivery pipelines
+You have experience working with distributed systems and microservices architectures
+You possess strong programming, debugging, and problem-solving skills in modern software engineering environments
+You continuously adapt to emerging technologies, testing methodologies, and engineering best practices
+
+Nice To Have
+
+Experience testing artificial intelligence or machine learning applications
+Familiarity with large language model evaluation techniques and prompt engineering
+Experience working within cybersecurity or cloud-native environments
+Experience building scalable testing infrastructure for distributed systems
+
+What Success Looks Like
+
+Scalable and reliable automated testing frameworks supporting high-throughput distributed systems
+Improved software quality, reliability, and deployment confidence across engineering teams
+Comprehensive validation pipelines for artificial intelligence and machine learning systems
+Proactive identification of quality, performance, and scalability issues before production deployment
+Strong collaboration across engineering teams to deliver resilient and high-performing systems
+
+Do not meet all the requirements? That is okay. We still encourage you to apply. We have many opportunities and are always looking for strong talent.
+
+On-Camera Policy
+
+To support a fair, transparent, and engaging interview experience, candidates interviewing remotely are expected to be on camera during all video interviews. Being on camera fosters authentic connection, improves communication, and allows for full engagement from both candidates and interviewers. We understand that technical, bandwidth, or location-related challenges may occasionally prevent video use. If this applies, candidates are required to notify us in advance so we can explore appropriate accommodations.
+
+At Arctic Wolf, we foster a collaborative and inclusive work environment that thrives on diversity of thought, background, and culture. This is reflected in our multiple awards, including Top Workplace United States, Best Places to Work United States, Great Place to Work Canada, Great Place to Work United Kingdom, and Kununu Top Company Germany. Our commitment to bold growth and shaping the future of security operations is matched by our dedication to customer satisfaction, with over 10,000 customers worldwide and more than 2,000 channel partners globally. As we continue to expand and enhance our technology, Arctic Wolf remains a trusted name in the industry.
+
+Our Values
+
+Arctic Wolf recognizes that success comes from delighting our customers, so we work together to ensure that happens every day. We believe in diversity and inclusion and value the unique perspectives all employees bring to the organization. By protecting sensitive data and working to end cyber risk, we contribute to an industry that serves the greater good.
+
+We celebrate diverse perspectives through our Pack Unity program and encourage employees to participate in or create new alliances.
+
+We also believe in corporate responsibility and have joined the Pledge One Percent movement to give back to our communities.
+
+All Employees Receive Compelling Compensation And Benefits Packages, Including
+
+Equity for all employees
+Flexible annual leave, paid holidays, and volunteer days
+Training and career development programs
+Comprehensive private benefits plan including medical insurance for you and your family, life insurance equal to three times compensation, and personal accident insurance
+Fertility support and paid parental leave
+
+Arctic Wolf is an equal opportunity employer and considers applicants for employment without regard to race, color, religion, sex, orientation, national origin, age, disability, genetics, or any other basis forbidden under applicable law. We are committed to fostering a welcoming, accessible, and inclusive environment.
+
+Security Requirements
+
+Conduct duties in accordance with Arctic Wolf information security policies, standards, and controls
+Background checks are required for this position
+This role may require access to information protected under United States export control laws and regulations
+… more
+
+Benefits found in job post
+
+Medical insurance"
+"Deccan AI","Software Test Engineer","About Deccan AI Deccan AI builds enterprise AI systems that put accuracy at the center of intelligence. We work at the intersection of applied ML, data infrastructure, and product, helping organizations move from pilots to production grade AI. We're looking for a Technical Product Manager to help shape what we build next.
+
+We recently raised $25M in Series A funding and are entering a rapid growth phase. Our India office is based in Hyderabad.
+
+We’re not just participating in the AI race we’re building the infrastructure that powers it.
+
+With 1M+ global experts, advanced automation, and vertically integrated platforms, we deliver the gold-standard data that world-class AI models rely on. The AI data infrastructure market is expected to grow exponentially over the next decade, and Deccan AI is positioned to become a defining company in this space.
+
+Role Summary: Build automated testing frameworks and quality processes that catch issues before they reach production, for the focus area below.
+
+Core Skills: Test automation (Selenium/Playwright/etc.), CI/CD integration, scripting, and QA strategy.
+
+Engineer, SDET
+
+Short JD: Build automated testing frameworks and quality processes that catch issues before they reach production, for the focus area below.
+
+Senior Engineer, SDET
+
+Short JD: Build automated testing frameworks and quality processes that catch issues before they reach production, for the focus area below.
+
+Sr Engineer, Software - Automation Testing
+
+Focus area: Automation Testing
+
+Short JD: Build automated testing frameworks and quality processes that catch issues before they reach production, for the focus area below. This opening is specifically for Automation Testing.
+
+Note: This is a future-ready pipeline role — it is not open today. Apply only if you'd like Deccan AI to reach out when this position opens, so your details are on hand to close it in a shorter turnaround time (TAT).
+
+… more"
+"Neo","Lead Software Development Engineer in Test","About Neo
+
+AI is the most significant shift in how work gets done since the advent of the Internet — yet most organizations fail to capture its value. Neo is changing that.
+
+Founded by Bhavin Turakhia — Co-Founder of Zeta, Radix, and Titan — Neo is building an integrated, AI-first suite of products that capture work, centralize context, and make AI a first-class participant in every workflow:
+
+Tasket — A radically reimagined, AI-native, work management platform that centralizes context and makes AI delegation seamless for all work.
+Friday — AI Assistant, co-worker and agent platform, pre-integrated into Tasket, Studio, Drive and 1000+ SaaS platforms.
+Studio — AI-native suite for co-creating docs, spreadsheets and diagrams collaboratively with humans and agents.
+Drive — AI-native repository, where humans and agents can co-work on files.
+Scribe — AI assistant for meetings that goes beyond note-taking and actually does your work while on the call.
+
+About the role
+
+As a Lead SDET you will set the technical direction for test strategy and quality across Neo's engineering organization, and mentor the SDETs and QA engineers who work within it.
+
+We are proponents of leveraging best-in-breed AI tools at every step of the engineering lifecycle — design, development, review, and testing. This requires a different engineering mindset: a lean team of senior, hands-on, AI-adept engineers, resulting in ultra-rapid iteration cycles and fast output. You will own and oversee this approach, from design through to production.
+
+Your scope isn't one team's test suite — it's the frameworks, standards, and quality gates every squad builds on, and the org-wide roadmap for how Neo uses AI in testing.
+
+Job Location
+
+Bangalore, India (100% on-site)
+
+Responsibilities
+
+Architecture & technical direction
+
+Architect centralized test automation frameworks for UI and backend (REST/GraphQL) that multiple squads adopt, rather than each team building its own.
+Serve as the deepest technical expert on software internals for testing — unblock teams on complex distributed-system problems and give architectural guidance where a single squad can't resolve it alone.
+
+AI quality strategy & harness
+
+Define the roadmap for adopting AI tools and LLMs in testing, and lead evaluation of new AI coding assistants and smart-automation capabilities (self-healing locators, AI-driven visual testing) before rolling them out org-wide.
+Standardize how the organization validates AI-powered features — model accuracy checks, hallucination and prompt-injection testing — and build the automated pipelines for prompt evaluation and data-quality verification that make this systematic rather than ad hoc.
+
+CI/CD & release strategy
+
+Own the vision for testing infrastructure: architect parallelized CI/CD pipelines, optimize test execution time and cloud cost, and act as the gatekeeper for production releases.
+Design test environments and grids on Kubernetes/Docker that scale with the org's testing load.
+
+Mentoring & raising the bar
+
+Lead and mentor a team of SDETs and QA engineers; set the coding standards and architecture-review process the whole org tests against.
+Build the quality culture — shift-left practices, code review discipline — and turn what works on one team into the standard for all of them.
+
+Organizational quality & product partnership
+
+Partner with engineering managers, directors, and product leadership so testability and quality are designed into the architecture from day one, not bolted on after.
+Define and report department-level quality KPIs (DORA metrics, escaped-defect rate, coverage trends) to leadership, and spearhead cross-functional initiatives where quality bottlenecks span dev, QA, and DevOps.
+
+Skills
+
+AI-native engineering practice — Evaluates, selects, and rolls out AI coding assistants and AI-augmented testing capabilities at an organizational level; builds the automated pipelines that validate AI/LLM-powered features (prompt evaluation, data-quality verification) systematically.
+Programming & standards — Expert in Java and JavaScript/TypeScript; defines coding standards, leads architecture reviews, and keeps enterprise test repositories scalable and maintainable.
+Systems architecture — Deep, system-level understanding of microservices, RESTful and GraphQL APIs, HTTP/HTTPS, and asynchronous messaging systems.
+Test infrastructure at scale — Designs test environments and grids using Kubernetes and Docker, and deploys testing infrastructure across cloud environments.
+Tooling standardization — Standardizes automation tooling (Playwright, Cypress, or Selenium; Postman, TestNG, RestAssured) across the engineering department rather than per team.
+Observability & quality dashboards — Builds centralized dashboards on Prometheus, Grafana, or Splunk that give leadership visibility into system health, test flakiness, and production anomalies.
+Performance & resilience — Defines department-wide load, stress, and chaos-engineering strategies for high-throughput microservices under peak load.
+Metrics & process — Tracks department-level quality KPIs and DORA metrics; expert in Agile methodology with a track record of removing friction from the SDLC.
+
+Experience & Qualifications
+
+7+ years of progressive experience as an SDET or Test Automation Engineer, including 2+ years in a lead, principal, or architectural capacity driving organization-wide quality strategy.
+Expert in Java and JavaScript/TypeScript with a track record of architecting scalable UI and REST/API frameworks from scratch.
+Hands-on experience designing parallelized CI/CD pipelines on cloud platforms with containerization (Docker/Kubernetes), and a proven record mentoring teams and driving shift-left testing in Agile environments.
+Bachelor's degree in Computer Science, Software Engineering, or a related field.
+
+Equal Opportunity
+
+Neo is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees. We encourage applicants from all backgrounds, cultures, and communities to apply and believe that a diverse workforce is key to our success.
+
+… more"
+"Quantiphi","Senior Test Engineer - AI/ML","While technology is the heart of our business, a global and diverse culture is the heart of our success. We love our people and we take pride in catering them to a culture built on transparency, diversity, integrity, learning and growth.
+
+If working in an environment that encourages you to innovate and excel, not just in professional but personal life, interests you- you would enjoy your career with Quantiphi!
+
+Role: Senior Test Engineer - AI/ML
+
+Experience: 3-6 years
+
+Location: Mumbai/Bangalore (Hybrid)
+
+Key Responsibilities
+
+Design, develop, and maintain UI and API automation test suites using modern automation frameworks.
+Independently own end-to-end testing activities including test planning, automation development, execution, defect management, and reporting.
+Validate AI/ML applications, Generative AI solutions, LLM-powered applications, and intelligent workflows.
+Design and execute functional, integration, regression, and end-to-end test automation for traditional and AI-enabled applications.
+Develop and maintain reusable automation frameworks, libraries, and utilities.
+Automate API testing using REST Assured (Java) or Python Requests.
+Develop UI automation using Playwright.
+Validate backend data using SQL and perform database verification.
+Develop automated validations for AI model outputs, prompt responses, RAG pipelines, and chatbot conversations.
+Validate AI responses for correctness, consistency, relevance, grounding, safety, hallucinations, and bias.
+Collaborate with ML Engineers, Software Engineers, and Product Owners to define AI quality validation strategies.
+Integrate automated test suites into CI/CD pipelines and implement quality gates.
+Leverage GenAI tools to accelerate test case generation, automation development, debugging, documentation, and productivity.
+Contribute to AI testing frameworks, accelerators, and Quality Engineering best practices.
+Mentor junior engineers and promote automation-first and AI-first Quality Engineering practices.
+
+Must Have Skills
+
+Strong understanding of Software Testing Life Cycle (STLC), SDLC, Agile, and Scrum methodologies.
+Hands-on experience in designing test strategies, test scenarios, test cases, and test execution.
+Strong expertise in UI automation using Playwright and API automation using REST Assured (Java) or Python Requests.
+Hands-on experience with Postman for API testing and validation.
+Strong SQL skills with hands-on experience in database testing and backend data validation.
+Experience integrating automation suites with CI/CD pipelines using Jenkins, GitHub Actions, or similar.
+Proficiency with Git and version control best practices.
+Hands-on experience testing AI/ML or Generative AI applications.
+Understanding of Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), chatbots, copilots, or AI agents.
+Experience validating AI responses for accuracy, relevance, consistency, hallucinations, toxicity, bias, and safety.
+Experience designing test scenarios for prompt engineering and AI workflow validation.
+Understanding of AI evaluation techniques and automated output validation.
+Familiarity with AI evaluation frameworks or libraries (e.g., DeepEval, Ragas, LangSmith, Promptfoo, MLflow, or similar).
+Experience using GenAI tools such as ChatGPT, GitHub Copilot, Kiro, Claude, or similar to accelerate test design, automation development, debugging, test data generation, and documentation.
+Strong debugging, root cause analysis, and analytical problem-solving skills.
+Ability to independently own end-to-end testing activities with minimal supervision.
+Excellent communication, collaboration, and stakeholder management skills.
+Ability to mentor junior engineers and promote automation and Quality Engineering best practices.
+Strong attention to detail with a quality-first and automation-first mindset.
+
+Nice to have skills
+
+Knowledge of AWS services such as Amazon Bedrock, SageMaker, EC2, Lambda, API Gateway, S3, RDS, DynamoDB, CloudWatch, ECS/EKS, and IAM.
+Experience testing cloud-native applications deployed on AWS.
+Experience in Data Warehouse, ETL, or Data Pipeline testing.
+Experience with performance testing tools such as JMeter or k6.
+Exposure to Docker, Kubernetes, and containerized application testing.
+Relevant certifications in Playwright, AWS, Quality Engineering, or Agile are an added advantage.
+
+If you like wild growth and working with happy, enthusiastic over-achievers, you'll enjoy your career with us!
+… more"
+"HDFC Bank","Senior QA Engineer","Key Responsibilities
+
+Proven ability to manage/lead the day to day testing activities and deliverables.
+Hands on working experience on testing activities.
+Expert experience in Mobile App testing, Web application testing, and API Testing
+Expert in Functional Manual testing
+Excellent knowledge on Automation testing and hands on programming experience with any industry standard automation tools, framework will be preferred. (like Java, Python, Selenium etc)
+Good exposure to CI/CD tools like GIT and integration of Automation scripts into CI/CD Pipeline
+Expert working exposure in an SDET framework and TDD framework.
+Good knowledge on AI Concepts, conversational banking, adoption of AI practises in QE
+Expert knowledge in Test environments, infrastructure, CI/CD pipelines.
+Working experience in SAFE Agile practise and environment.
+
+Exp: 8 years and above
+
+Location: Bangalore
+
+Email ID: pooja.patil7@hdfc.bank.in"
+"BlinkRx","Senior Software Development Engineer in Test","Company Overview:
+
+Blink Health is the fastest growing healthcare technology company that builds products to make prescriptions accessible and affordable to everybody. Our two primary products – BlinkRx and Quick Save – remove traditional roadblocks within the current prescription supply chain, resulting in better access to critical medications and improved health outcomes for patients.
+
+BlinkRx is the world's first pharma-to-patient cloud that offers a digital concierge service for patients who are prescribed branded medications. Patients benefit from transparent low prices, free home delivery, and world-class support on this first-of-its-kind centralized platform.
+
+About the team:
+
+Blink Engineering strives to build trusted, highly observable, data-driven products to bring affordable, accessible healthcare to all Americans. We believe in solving complexity through the use of simple, well-known technologies. We are a highly collaborative team that believes in owning outcomes over owning code and putting patients at the center of everything we do.
+
+About the role:
+
+As a Senior Software Development Engineer in Test I, you will design and implement robust testing strategies and automation solutions for complex, cross-team product features. You will own the end-to-end automation roadmap for one or more modules defining strategic goals, execution plans, and success metrics.
+
+The SDET team plays an important role in our company's product development process. You'll collaborate closely with engineers, TPMs, and product leaders to ensure our quality efforts scale with our product complexity. You will influence testing best practices across teams, driving improvements in automation coverage, performance, and reliability.
+
+If you join Blink, you will:
+
+Design and implement end-to-end automation frameworks and testing strategies for complex, cross-team features.
+Own the automation roadmap for one or more modules. Defining goals, execution plans, and success metrics.
+Anticipate risks, identify testability gaps, and drive continuous improvements in quality and efficiency.
+Build and maintain functional, performance, and security automation tools integrated into CI/CD pipelines.
+Collaborate across engineering, product, and QA teams to ensure comprehensive coverage and reliable releases.
+Provide technical mentorship to SDETs and engineers, elevating automation design and code quality.
+Champion best practices in test design, observability, and automation standards across the organization
+
+About You:
+
+You have at least 7+ years of experience in SDET contributions and Tooling
+You are passionate about delivering high-quality, reliable products through automation and smart testing strategies for both front end and backend.
+You have advanced proficiency in testing methodologies, automation frameworks, and debugging techniques.
+You are experienced in building and maintaining test infrastructure across multiple platforms and services.
+You have strong command over algorithms, data structures, database and scripting languages (SQL, Python, JavaScript, Typescript or Java).
+You have hands-on experience with CI/CD pipelines, performance tools, and monitoring systems.
+You have a deep understanding of API and backend testing, ideally with experience in AWS and systems like Kafka or Kinesis.
+Hands-on experience in setting up the Performance/Load/Stress test infrastructure.
+
+Extras:
+
+Experience with cloud-native QA automation architecture and tool implementation
+Working knowledge of event-driven systems and distributed test environments.
+Familiarity with observability and monitoring tools for debugging in production.
+
+We are an equal opportunity employer and value diversity of all kinds."
+"UST","Lead I - Software Testing","Role Description
+
+Who we are: At UST, we help the world's best organizations grow and succeed through transformation. With over 30,000 employees in 30+ countries, we build for boundless impact.
+
+Summary
+
+UST is looking for a Senior QA Engineer - API & AI/LLM Testing with strong expertise in API testing, automation, AI/LLM validation, and healthcare domain knowledge. The ideal candidate will be responsible for designing and executing comprehensive test strategies, validating AI-driven workflows, developing automation frameworks, and ensuring high-quality software delivery across API, database, and UI layers.
+
+Key Roles & Responsibilities
+
+Design and execute comprehensive test strategies for API-driven applications.
+Perform end-to-end testing across APIs, databases, and UI layers.
+Validate data extraction, transformation logic, and AI/LLM-generated outputs.
+Develop and maintain scalable automation frameworks for API and UI testing.
+Perform SQL and NoSQL data validation using tools such as DBeaver and MongoDB.
+Test AI/LLM-powered applications including chatbots, NLP workflows, and intelligent data extraction solutions.
+Integrate automated test suites into CI/CD pipelines.
+Collaborate with product managers, developers, business analysts, and stakeholders to ensure product quality.
+Identify, analyze, debug, and track defects through resolution.
+Lead quality initiatives by reviewing testing strategies and promoting automation best practices.
+Mentor junior QA engineers and provide technical guidance.
+Drive innovation by evaluating new testing tools, AI-powered QA solutions, and automation techniques.
+
+Requirements
+
+5+ years of overall IT experience.
+Experience in API testing and test automation.
+Hands-on experience with AI/LLM application testing.
+Strong healthcare domain knowledge, preferably in Claims, Benefits, Eligibility, Membership, or Provider modules.
+Experience creating test strategies, test plans, test cases, and test data.
+Strong analytical and problem-solving skills.
+Excellent communication and stakeholder management abilities.
+Experience working in Agile/Scrum environments.
+
+Required Skills
+
+API Testing using Postman and REST APIs.
+Automation using RestAssured, Selenium, Playwright, Cypress, or similar tools.
+SQL and NoSQL database validation (Oracle, MongoDB).
+CI/CD tools such as Jenkins and Git.
+Understanding of microservices architecture and integration testing.
+Healthcare domain expertise (Claims, Benefits, Membership, Eligibility, Provider).
+AI/LLM application testing including chatbot validation, NLP, and data extraction.
+Cloud platform exposure (AWS and/or Azure).
+Java or Python programming knowledge.
+JSON, Web Services, Jira, and Confluence.
+
+Desired Skills
+
+AI-powered testing tools. Cucumber BDD framework. CI/CD integration experience. UFT, Appium, or Power Automate. Agile and Scrum methodologies. Disaster Recovery, Security, Vulnerability, and Performance Testing. AI & Machine Learning integration experience. Docker and Kubernetes exposure. Maven, Bitbucket, and Git.
+
+Qualification
+
+Bachelor's or Master's degree in Computer Science, Information Technology, Engineering, or an equivalent discipline. Relevant QA Automation, Cloud, or AI certifications are an added advantage.
+
+UST is an Equal Opportunity Employer."

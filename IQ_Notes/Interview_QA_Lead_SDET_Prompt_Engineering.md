@@ -599,3 +599,76 @@ For team environments, the `results/` folder would be committed to the repo (unl
 
 Source: [app.py auto-save logic](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_03_Local_test_case_generator/app.py), [results/SCRUM-3/](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_03_Local_test_case_generator/results/SCRUM-3/)
 
+---
+
+## Section H: AI Job Kit — Resume Tailoring, Honesty Gate & Batch Automation (Chapter 04)
+
+---
+
+**Q36: You built an AI-powered resume tailoring system for batch processing 25 job descriptions. Walk me through how it works end-to-end.**
+
+**A:** The system is built on a `resume-tailor` Skill — a structured `.md` file that acts as a **constitution** governing the AI's behavior, not just a prompt. The end-to-end flow is:
+
+1. **Input**: A master resume (`.docx`) and a LinkedIn CSV with 25 job descriptions.
+2. **Per JD**: Extract JD requirements (tools, seniority, domain, responsibility verbs).
+3. **Honesty Gate**: Cross-reference every requirement against the master resume. Sort into True Overlap / Adjacent Transferable / Gap. Stop and flag if there's a seniority mismatch of ≥1.5×.
+4. **Tailoring**: Rewrite headline, summary, skills section, and 3–6 experience bullets using `r()` (plain) and `hl()` (yellow highlight) TextRun objects via `docx-js`.
+5. **Output**: `Resume_<Company>_<RoleShort>.docx` — one per JD, with every tailored word highlighted yellow for transparent review.
+6. **Batch**: Run steps 2–5 independently per CSV row. A good match for Woolworths never exempts Pine Labs from the same Honesty Gate check.
+
+The critical engineering decision is that tailoring is done at the **TextRun level**, not the paragraph level — individual words within a bullet can be highlighted while surrounding context remains plain. This precision makes the diff genuinely useful.
+
+Source: [SKILL.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/resume-tailor/resume-tailor/SKILL.md), [batch_build_resumes.js](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/output/batch_build_resumes.js)
+
+---
+
+**Q37: What is the Honesty Gate and why is it the most important concept in AI-assisted career tooling?**
+
+**A:** The Honesty Gate is a mandatory cross-reference step in the `resume-tailor` skill that runs before any tailoring begins. Every JD requirement is classified into one of three buckets:
+
+| Bucket | Definition | What the AI Does |
+|--------|-----------|-----------------|
+| **True Overlap** | Candidate genuinely has this, possibly under different terminology | Surface and re-word toward JD language |
+| **Adjacent/Transferable** | Candidate has a genuine equivalent (e.g., SpecFlow vs Cucumber) | Mention with honest parenthetical — never claim the named tool |
+| **Gap** | No evidence the person has done this | **Do not add.** Flag for user decision. |
+
+If the JD's overall seniority is ≥1.5× the candidate's actual experience, the skill **stops entirely** and shows a gap table before generating anything. The reason this is the most critical concept: LLMs under keyword-matching pressure naturally gravitate toward adding missing skills. Without a constitutional rule forbidding this, the AI will confidently fabricate experience — which is dishonest, fails at interview, and damages credibility. The Honesty Gate is the equivalent of a QA exit criterion.
+
+Source: [SKILL.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/resume-tailor/resume-tailor/SKILL.md), lines 28–44, 77–85
+
+---
+
+**Q38: Explain the Yellow Highlight Convention in the docx-js resume builder. Why is it architecturally significant?**
+
+**A:** Every word or clause inserted/reworded specifically to match a JD is wrapped in `hl()` — a TextRun with `HighlightColor.YELLOW`. Unchanged original text uses `r()` — plain, no highlight. This is architecturally significant because:
+
+1. **Auditable diff**: Candidates scan for yellow and review each change — no need to re-read the entire document.
+2. **Honesty Gate enforcement at the code level**: Every fabricated phrase would have to be an explicit `hl()` call — there is no way to silently slip content in without it showing up yellow.
+3. **Sentence-level granularity**: A single bullet can mix `r()` and `hl()` — only the JD-specific re-wording highlights, not the surrounding context.
+
+Source: [build_resume.js](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/resume-tailor/resume-tailor/scripts/build_resume.js), lines 33–39; [style_guide.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/resume-tailor/resume-tailor/references/style_guide.md), lines 37–40
+
+---
+
+**Q39: You describe the resume-tailor SKILL.md as a "Skill-as-Constitution." What does this design pattern mean and when should you use it?**
+
+**A:** A **Skill-as-Constitution** is a `.md` file that doesn't just describe a workflow — it contains **non-negotiable hard rules** the AI must never violate, regardless of how the user phrases the request. In the `resume-tailor` skill, lines 77–85 list six absolute constraints (never invent metrics, never claim unclaimed tools, always highlight every change, etc.). These are structural gates, not guidelines. Use this pattern any time AI generates professional output on behalf of a human where misrepresentation is a real risk — résumés, legal summaries, healthcare reports, financial advice. The pattern combines agent flexibility with rule-based determinism — analogous to mandatory QA exit criteria that cannot be bypassed regardless of schedule pressure.
+
+Source: [SKILL.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/resume-tailor/resume-tailor/SKILL.md), lines 77–85
+
+---
+
+**Q40: How does Chapter 04's batch resume generation demonstrate the "agentic engineering" mindset?**
+
+**A:** Agentic engineering applies software engineering discipline to AI workflows — building maintainable, auditable, scalable systems rather than ad-hoc prompts. Chapter 04 demonstrates four engineering decisions:
+
+1. **Structured Skill, not a prompt**: Tailoring logic lives in `SKILL.md` — a governed, versionable workflow with hard rules, committed to the repo.
+2. **Code-level abstraction**: `buildResume(company, role, adjustments)` is a reusable function. Adding a new company is a new function call with a data object — not rewriting generation logic.
+3. **Auditable output via `hl()`**: Every AI-driven change is machine-trackable (yellow highlight) — the resume equivalent of a Git diff.
+4. **Batch-first, gate-per-row**: 25 JDs processed independently with a per-JD Honesty Gate — like isolated test cases with their own setup/teardown, no shared state.
+
+Result: 4 tailored, highlighted, professional `.docx` resumes in seconds, with full auditability and zero fabricated content.
+
+Source: [batch_build_resumes.js](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/output/batch_build_resumes.js); [walkthrough.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/walkthrough.md); [SKILL.md](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_04_AIJobKit/resume-tailor/resume-tailor/SKILL.md)
+
+
