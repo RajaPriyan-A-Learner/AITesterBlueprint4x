@@ -1,9 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Upload, X, Eye, Loader2, FileScan } from 'lucide-react';
+import { Upload, X, Eye, Loader2, FileScan, Copy, Check, Download } from 'lucide-react';
 import { extractTextFromImage } from '../services/ocrService';
+import { exportToTxt, exportToMd, exportToDocx, copyToClipboard } from '../services/exportService';
 
 export default function ImagePasteZone({
   selectedImage,
+  extractedText,
   onImageSelected,
   onClearImage,
   onExtractedText,
@@ -14,6 +16,7 @@ export default function ImagePasteZone({
   const [ocrStatus, setOcrStatus] = useState('');
   const [isDragOver, setIsDragOver] = useState(false);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
+  const [dockCopied, setDockCopied] = useState(false);
   const fileInputRef = useRef(null);
 
   // Global Clipboard Paste Listener (Ctrl+V)
@@ -173,7 +176,43 @@ export default function ImagePasteZone({
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            {extractedText && !isOcrRunning && (
+              <>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await copyToClipboard(extractedText);
+                    setDockCopied(true);
+                    setTimeout(() => setDockCopied(false), 2000);
+                  }}
+                  className="quick-chip"
+                  style={{
+                    padding: '4px 8px',
+                    fontSize: '0.75rem',
+                    background: dockCopied ? 'rgba(52, 211, 153, 0.2)' : 'rgba(99, 102, 241, 0.2)',
+                    borderColor: dockCopied ? 'rgba(52, 211, 153, 0.4)' : 'rgba(99, 102, 241, 0.4)',
+                    color: dockCopied ? '#34d399' : '#a5b4fc',
+                  }}
+                  title="Copy extracted OCR text"
+                >
+                  {dockCopied ? <Check size={13} color="#34d399" /> : <Copy size={13} />}
+                  <span>{dockCopied ? 'Copied' : 'Copy OCR'}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => exportToTxt(extractedText, `${selectedImage.name || 'extracted'}.txt`)}
+                  className="quick-chip"
+                  style={{ padding: '4px 8px', fontSize: '0.75rem' }}
+                  title="Export raw OCR text as .txt"
+                >
+                  <Download size={13} />
+                  <span>.TXT</span>
+                </button>
+              </>
+            )}
+
             <button
               type="button"
               onClick={() => setPreviewModalOpen(true)}

@@ -1,4 +1,3 @@
-import { saveAs } from 'file-saver';
 import { Document, Paragraph, TextRun, HeadingLevel, Packer } from 'docx';
 import confetti from 'canvas-confetti';
 
@@ -19,36 +18,73 @@ export function triggerSuccessEffect() {
 }
 
 /**
- * Export content as Plain Text (.txt)
+ * Robust local file downloader that prevents Chrome ERR_FILE_NOT_FOUND blob revocation errors.
+ * Saves files directly to the local computer without requiring any cloud storage.
+ * 
+ * @param {Blob} blob 
+ * @param {string} filename 
+ */
+export function triggerLocalDownload(blob, filename) {
+  try {
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.style.display = 'none';
+    
+    // Attach to body and trigger native browser file save
+    document.body.appendChild(link);
+    link.click();
+
+    // Retain object URL in memory for 2 minutes to prevent ERR_FILE_NOT_FOUND if user clicks open from browser download shelf
+    setTimeout(() => {
+      if (document.body.contains(link)) {
+        document.body.removeChild(link);
+      }
+      window.URL.revokeObjectURL(url);
+    }, 120000);
+
+    triggerSuccessEffect();
+    return true;
+  } catch (err) {
+    console.error('Local file download error:', err);
+    return false;
+  }
+}
+
+/**
+ * Export content as Plain Text (.txt) directly to local storage
  * @param {string} content
  * @param {string} [filename]
  */
 export function exportToTxt(content, filename = 'extracted_text.txt') {
+  const safeName = filename.endsWith('.txt') ? filename : `${filename}.txt`;
   const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-  saveAs(blob, filename.endsWith('.txt') ? filename : `${filename}.txt`);
-  triggerSuccessEffect();
+  triggerLocalDownload(blob, safeName);
 }
 
 /**
- * Export content as Markdown (.md)
+ * Export content as Markdown (.md) directly to local storage
  * @param {string} content
  * @param {string} [filename]
  */
 export function exportToMd(content, filename = 'extracted_document.md') {
+  const safeName = filename.endsWith('.md') ? filename : `${filename}.md`;
   const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
-  saveAs(blob, filename.endsWith('.md') ? filename : `${filename}.md`);
-  triggerSuccessEffect();
+  triggerLocalDownload(blob, safeName);
 }
 
 /**
- * Export content as Microsoft Word Document (.docx)
+ * Export content as Microsoft Word Document (.docx) directly to local storage
  * @param {string} content
  * @param {string} [title]
  * @param {string} [filename]
  */
 export async function exportToDocx(content, title = 'Extracted Document', filename = 'document.docx') {
+  const safeName = filename.endsWith('.docx') ? filename : `${filename}.docx`;
+
   try {
-    // First attempt: call backend proxy for docx buffer
+    // Try backend proxy if active
     const res = await fetch('/api/export-docx', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -57,19 +93,21 @@ export async function exportToDocx(content, title = 'Extracted Document', filena
 
     if (res.ok) {
       const blob = await res.blob();
-      saveAs(blob, filename.endsWith('.docx') ? filename : `${filename}.docx`);
-      triggerSuccessEffect();
+      const docxBlob = new Blob([blob], {
+        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      });
+      triggerLocalDownload(docxBlob, safeName);
       return;
     }
   } catch (err) {
-    console.warn('Backend docx export failed, fallback to client-side docx generator:', err);
+    console.warn('Backend docx export skipped, generating client-side docx:', err);
   }
 
-  // Fallback: Client-side docx generation
-  const lines = content.split('\n');
+  // Client-side docx generation fallback
+  const lines = (content || '').split('\n');
   const docElements = [];
 
-  // Document Title
+  // Title
   docElements.push(
     new Paragraph({
       text: title,
@@ -142,22 +180,50 @@ export async function exportToDocx(content, title = 'Extracted Document', filena
   });
 
   const blob = await Packer.toBlob(doc);
-  saveAs(blob, filename.endsWith('.docx') ? filename : `${filename}.docx`);
-  triggerSuccessEffect();
+  const docxBlob = new Blob([blob], {
+    type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  });
+  triggerLocalDownload(docxBlob, safeName);
 }
 
 /**
- * Copy text to clipboard
+ * Copy text to clipboard with modern API and fallback for older environments
  * @param {string} text
  * @returns {Promise<boolean>}
  */
 export async function copyToClipboard(text) {
+  if (!text) return false;
+
   try {
-    await navigator.clipboard.writeText(text);
-    triggerSuccessEffect();
-    return true;
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      triggerSuccessEffect();
+      return true;
+    }
   } catch (err) {
-    console.error('Failed to copy to clipboard:', err);
-    return false;
+    console.warn('navigator.clipboard failed, attempting fallback textarea copy:', err);
   }
+
+  // Fallback for non-secure contexts or permission restrictions
+  try {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    const successful = document.execCommand('copy');
+    document.body.removeChild(textArea);
+    if (successful) {
+      triggerSuccessEffect();
+      return true;
+    }
+  } catch (err) {
+    console.error('Fallback copy to clipboard failed:', err);
+  }
+
+  return false;
 }
+

@@ -35,6 +35,7 @@ app.get('/api/models', async (req, res) => {
       size: m.size,
       modified_at: m.modified_at,
       details: m.details,
+      capabilities: m.capabilities || [],
     }));
     res.json({ success: true, models });
   } catch (error) {

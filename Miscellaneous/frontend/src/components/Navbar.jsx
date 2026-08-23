@@ -45,11 +45,20 @@ export default function Navbar({
               onChange={(e) => onSelectModel(e.target.value)}
             >
               {models.length > 0 ? (
-                models.map((m) => (
-                  <option key={m.name} value={m.name}>
-                    {m.name} {m.size ? `(${(m.size / (1024 * 1024 * 1024)).toFixed(1)} GB)` : ''}
-                  </option>
-                ))
+                models.map((m) => {
+                  const hasVision =
+                    m.capabilities?.includes('vision') ||
+                    m.name.toLowerCase().includes('vision') ||
+                    m.name.toLowerCase().includes('llava') ||
+                    m.name.toLowerCase().includes('qwen3.5') ||
+                    m.name.toLowerCase().includes('minicpm');
+                  const badge = hasVision ? '👁️ Vision' : '📝 Text+OCR';
+                  return (
+                    <option key={m.name} value={m.name}>
+                      {m.name} [{badge}] {m.size ? `(${(m.size / (1024 * 1024 * 1024)).toFixed(1)} GB)` : ''}
+                    </option>
+                  );
+                })
               ) : (
                 <option value="" disabled>
                   No models found

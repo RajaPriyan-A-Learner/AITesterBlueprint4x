@@ -109,11 +109,33 @@ export default function App() {
       fullUserPrompt = `[Extracted Screenshot OCR Text]:\n"""\n${extractedText}\n"""\n\n[User Instructions]:\n${userPrompt || 'Format and extract all relevant information clearly, preserving all special characters, slashes (/), colons (:), URLs, and technical symbols with exact fidelity.'}`;
     }
 
-    const conversationHistory = messages.map((m) => ({
-      role: m.role,
-      content: m.content,
-      images: m.image?.base64 ? [m.image.base64] : undefined,
-    }));
+    const currentModelObj = models.find((m) => m.name === selectedModel);
+    const supportsVision = Boolean(
+      currentModelObj?.capabilities?.includes('vision') ||
+      selectedModel.toLowerCase().includes('vision') ||
+      selectedModel.toLowerCase().includes('llava') ||
+      selectedModel.toLowerCase().includes('qwen3.5') ||
+      selectedModel.toLowerCase().includes('minicpm')
+    );
+
+    const conversationHistory = messages.map((m) => {
+      const msg = {
+        role: m.role,
+        content: m.content,
+      };
+      if (supportsVision && m.image?.base64) {
+        msg.images = [m.image.base64];
+      }
+      return msg;
+    });
+
+    const userMessagePayload = {
+      role: 'user',
+      content: fullUserPrompt,
+    };
+    if (supportsVision && selectedImage?.base64) {
+      userMessagePayload.images = [selectedImage.base64];
+    }
 
     const ollamaMessages = [
       {
@@ -122,11 +144,7 @@ export default function App() {
           'You are an expert AI vision and OCR document processing assistant. When presented with extracted OCR text or images, structure the information clearly using Markdown headings, bullet points, code blocks, or tables. CRITICAL: Always preserve and accurately reconstruct technical symbols, URLs (https://, /workspace/, etc.), slashes, colons, hyphens, dots, and code syntax without omitting any special characters.',
       },
       ...conversationHistory,
-      {
-        role: 'user',
-        content: fullUserPrompt,
-        images: selectedImage?.base64 ? [selectedImage.base64] : undefined,
-      },
+      userMessagePayload,
     ];
 
     setMessages((prev) => [...prev, userMsgObj]);
@@ -298,6 +316,7 @@ export default function App() {
             {/* Screenshot Dropzone */}
             <ImagePasteZone
               selectedImage={selectedImage}
+              extractedText={extractedText}
               onImageSelected={setSelectedImage}
               onClearImage={handleClearImage}
               onExtractedText={handleExtractedText}
