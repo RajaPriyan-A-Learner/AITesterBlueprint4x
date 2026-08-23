@@ -28,11 +28,11 @@ export default function Column({
   }, [cards, sortOrder]);
 
   return (
-    <div className="flex flex-col w-72 flex-shrink-0">
+    <div className="flex flex-col w-full min-w-0">
       {/* Column header */}
       <div
-        className="flex items-center justify-between px-3 py-2.5 rounded-t-xl border border-b-0 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
-        style={{ borderTopColor: column.color }}
+        className="flex items-center justify-between px-3.5 py-2.5 rounded-t-xl border border-b-0 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900"
+        style={{ borderTop: `3px solid ${column.color}` }}
       >
         <div className="flex items-center gap-2">
           {/* Color dot */}

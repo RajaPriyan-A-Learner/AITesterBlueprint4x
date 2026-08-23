@@ -86,8 +86,8 @@ export default function AIOutreachModal({ isOpen, onClose, job }) {
       {/* Modal Box */}
       <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-2xl z-10 flex flex-col animate-in fade-in zoom-in-95 duration-150">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-850">
-          <div className="flex items-center gap-2.5">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900">
+          <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-xs">
               <Sparkles size={16} />
             </div>
@@ -95,18 +95,19 @@ export default function AIOutreachModal({ isOpen, onClose, job }) {
               <h2 className="font-bold text-slate-900 dark:text-white text-base">
                 1-Click AI Outreach Studio
               </h2>
-              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <div className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-200 font-medium">
                 <span>Applying for:</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{job.role}</span>
+                <span className="font-bold text-slate-900 dark:text-white">{job.role}</span>
                 <span>at</span>
-                <span className="font-semibold text-indigo-600 dark:text-indigo-400">{job.company}</span>
+                <span className="font-bold text-indigo-600 dark:text-indigo-400">{job.company}</span>
               </div>
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            aria-label="Close dialog"
+            className="p-1.5 rounded-lg text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
             <X size={18} />
           </button>

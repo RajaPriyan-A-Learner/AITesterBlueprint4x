@@ -3,6 +3,9 @@ import { useJobs } from './hooks/useJobs';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import StatsBar from './components/StatsBar';
+import KPICards from './components/KPICards';
+import ActivityHeatmap from './components/ActivityHeatmap';
+import MetricsView from './components/MetricsView';
 import KanbanBoard from './components/KanbanBoard';
 import TableView from './components/TableView';
 import JobModal from './components/JobModal';
@@ -12,8 +15,8 @@ import JDParserModal from './components/JDParserModal';
 import ATSScoreModal from './components/ATSScoreModal';
 import AIOutreachModal from './components/AIOutreachModal';
 import SettingsModal from './components/SettingsModal';
-import { Plus, Loader2, FilterX, Command, Sparkles } from 'lucide-react';
-import { triggerOfferConfetti, DEFAULT_CHECKLIST } from './lib/constants';
+import { Plus, Loader2, FilterX, Command, Sparkles, ChevronDown } from 'lucide-react';
+import { triggerOfferConfetti, DEFAULT_CHECKLIST, WORK_MODES } from './lib/constants';
 
 export default function App() {
   const { jobs, loading, addJob, updateJob, deleteJob, moveJob, resumeNames, exportData, importData } = useJobs();
@@ -30,7 +33,7 @@ export default function App() {
     localStorage.setItem('jt-dark', String(darkMode));
   }, [darkMode]);
 
-  // View mode — 'kanban' | 'table' — persisted in localStorage
+  // View mode — 'kanban' | 'table' | 'metrics' — persisted in localStorage
   const [viewMode, setViewMode] = useState(() => {
     return localStorage.getItem('jt-view') || 'kanban';
   });
@@ -57,15 +60,42 @@ export default function App() {
   // Delete confirm state
   const [deleteTarget, setDeleteTarget] = useState(null);
 
-  // Search/filter
+  // Filters
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState(null);
+  const [techStackFilter, setTechStackFilter] = useState('all');
+  const [workModeFilter, setWorkModeFilter] = useState('all');
+
+  // Compute unique tech stacks from all jobs
+  const availableTechStacks = useMemo(() => {
+    const set = new Set();
+    jobs.forEach((j) => {
+      if (Array.isArray(j.skills)) {
+        j.skills.forEach((s) => s && set.add(s.trim()));
+      }
+    });
+    return Array.from(set).sort();
+  }, [jobs]);
 
   const filteredJobs = useMemo(() => {
     return jobs.filter((j) => {
-      // Status filter
+      // Stage filter
       if (statusFilter && j.status !== statusFilter) {
         return false;
+      }
+      // Work mode filter
+      if (workModeFilter !== 'all') {
+        if ((j.workMode || '').toLowerCase() !== workModeFilter.toLowerCase()) {
+          return false;
+        }
+      }
+      // Tech stack filter
+      if (techStackFilter !== 'all') {
+        const skills = Array.isArray(j.skills) ? j.skills.map((s) => s.toLowerCase()) : [];
+        const text = `${j.role || ''} ${j.notes || ''}`.toLowerCase();
+        if (!skills.includes(techStackFilter.toLowerCase()) && !text.includes(techStackFilter.toLowerCase())) {
+          return false;
+        }
       }
       // Text search
       if (search.trim()) {
@@ -73,14 +103,15 @@ export default function App() {
         const matchesCompany = j.company.toLowerCase().includes(q);
         const matchesRole = j.role.toLowerCase().includes(q);
         const matchesResume = (j.resumeUsed || '').toLowerCase().includes(q);
+        const matchesReferral = (j.referral || '').toLowerCase().includes(q);
         const matchesNotes = (j.notes || '').toLowerCase().includes(q);
-        if (!matchesCompany && !matchesRole && !matchesResume && !matchesNotes) {
+        if (!matchesCompany && !matchesRole && !matchesResume && !matchesReferral && !matchesNotes) {
           return false;
         }
       }
       return true;
     });
-  }, [jobs, search, statusFilter]);
+  }, [jobs, search, statusFilter, techStackFilter, workModeFilter]);
 
   // Handlers
   const openAddModal = (status = 'wishlist', initialData = null) => {
@@ -136,7 +167,6 @@ export default function App() {
   // Global Keyboard Shortcuts (Ctrl+K, N, V, D, P, S, etc.)
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Ignore shortcut keys when actively typing inside form inputs
       const isInputFocused = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName);
 
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
@@ -157,7 +187,7 @@ export default function App() {
           setSettingsOpen(true);
         } else if (e.key === 'v' || e.key === 'V') {
           e.preventDefault();
-          handleToggleView(viewMode === 'kanban' ? 'table' : 'kanban');
+          handleToggleView(viewMode === 'kanban' ? 'table' : viewMode === 'table' ? 'metrics' : 'kanban');
         } else if (e.key === 'd' || e.key === 'D') {
           e.preventDefault();
           setDarkMode((d) => !d);
@@ -172,6 +202,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <Header
+        totalJobs={jobs.length}
         darkMode={darkMode}
         onToggleDark={() => setDarkMode((d) => !d)}
         onExport={exportData}
@@ -183,33 +214,82 @@ export default function App() {
         onOpenSettings={() => setSettingsOpen(true)}
       />
 
-      {/* Top Toolbar */}
-      <div className="max-w-screen-2xl mx-auto w-full px-4 sm:px-6 pt-3 pb-1 flex items-center justify-between gap-4 flex-wrap">
-        <div className="flex items-center gap-3 flex-wrap">
+      {/* Executive KPI Cards */}
+      {!loading && <KPICards jobs={jobs} />}
+
+      {/* 120-Day Application Activity Heatmap */}
+      {!loading && <ActivityHeatmap jobs={jobs} />}
+
+      {/* Top Filter & Toolbar */}
+      <div className="max-w-screen-2xl mx-auto w-full px-4 sm:px-6 pt-2 pb-2 flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex items-center gap-2.5 flex-wrap">
+          {/* Search bar */}
           <SearchBar value={search} onChange={setSearch} />
-          {statusFilter && (
-            <button
-              onClick={() => setStatusFilter(null)}
-              className="inline-flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-medium hover:bg-indigo-100 transition-colors cursor-pointer"
-              title="Clear stage filter"
+
+          {/* All Tech Stacks Dropdown */}
+          <div className="relative inline-flex items-center">
+            <select
+              value={techStackFilter}
+              onChange={(e) => setTechStackFilter(e.target.value)}
+              className="appearance-none cursor-pointer text-xs font-bold pl-3 pr-7 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
-              <span>Stage: {statusFilter}</span>
+              <option value="all">All Tech Stacks</option>
+              {availableTechStacks.map((stack) => (
+                <option key={stack} value={stack}>
+                  {stack}
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={12} className="absolute right-2 pointer-events-none text-slate-400" />
+          </div>
+
+          {/* All Modes Dropdown */}
+          <div className="relative inline-flex items-center">
+            <select
+              value={workModeFilter}
+              onChange={(e) => setWorkModeFilter(e.target.value)}
+              className="appearance-none cursor-pointer text-xs font-bold pl-3 pr-7 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value="all">All Modes</option>
+              {WORK_MODES.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {m.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown size={12} className="absolute right-2 pointer-events-none text-slate-400" />
+          </div>
+
+          {/* Clear Filter Badges */}
+          {(statusFilter || techStackFilter !== 'all' || workModeFilter !== 'all') && (
+            <button
+              onClick={() => {
+                setStatusFilter(null);
+                setTechStackFilter('all');
+                setWorkModeFilter('all');
+              }}
+              className="inline-flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold hover:bg-indigo-100 transition-colors cursor-pointer"
+              title="Reset all filters"
+            >
+              <span>Reset Filters</span>
               <FilterX size={12} />
             </button>
           )}
-          {(search || statusFilter) && (
-            <span className="text-xs text-slate-500 dark:text-slate-400">
-              {filteredJobs.length} of {jobs.length} jobs
+
+          {(search || statusFilter || techStackFilter !== 'all' || workModeFilter !== 'all') && (
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+              Showing {filteredJobs.length} of {jobs.length} applications
             </span>
           )}
         </div>
 
+        {/* Action Buttons */}
         <div className="flex items-center gap-2">
           {/* AI Parse JD Fast Button */}
           <button
             type="button"
             onClick={() => setJdParserOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-indigo-500/10 to-purple-500/10 dark:from-indigo-950/40 dark:to-purple-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100/50 transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-indigo-500/10 to-purple-500/10 dark:from-indigo-950/40 dark:to-purple-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100/50 transition-all cursor-pointer shadow-2xs"
             title="Parse job posting with AI (P)"
           >
             <Sparkles size={14} className="text-indigo-600 dark:text-indigo-400" />
@@ -226,10 +306,11 @@ export default function App() {
             <Command size={15} />
           </button>
 
+          {/* Add Job Button (Purple Gradient) */}
           <button
             id="add-new-job-btn"
             onClick={() => openAddModal('wishlist')}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm hover:shadow-md hover:scale-102 transition-all active:scale-95 cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-md hover:shadow-indigo-500/20 hover:scale-102 transition-all active:scale-95 cursor-pointer"
           >
             <Plus size={15} />
             <span>Add Job</span>
@@ -237,8 +318,8 @@ export default function App() {
         </div>
       </div>
 
-      {/* Pipeline Stats & Funnel Bar */}
-      {!loading && (
+      {/* Pipeline Stats Funnel Bar (Shown in Kanban mode) */}
+      {!loading && viewMode === 'kanban' && (
         <StatsBar
           jobs={jobs}
           activeFilterStatus={statusFilter}
@@ -246,11 +327,13 @@ export default function App() {
         />
       )}
 
-      {/* Main View Area (Kanban vs Table) */}
+      {/* Main View Area (Kanban vs Table vs Metrics) */}
       {loading ? (
         <div className="flex-1 flex items-center justify-center text-slate-400">
           <Loader2 size={28} className="animate-spin" />
         </div>
+      ) : viewMode === 'metrics' ? (
+        <MetricsView jobs={jobs} />
       ) : viewMode === 'table' ? (
         <TableView
           jobs={filteredJobs}
@@ -353,6 +436,3 @@ export default function App() {
     </div>
   );
 }
-
-
-

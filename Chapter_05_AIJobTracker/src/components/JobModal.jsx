@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
-import { X, Loader2, CheckSquare, Plus, Trash2, Sparkles, RefreshCw } from 'lucide-react';
-import { COLUMNS, PRIORITIES, DEFAULT_CHECKLIST } from '../lib/constants';
+import { X, Loader2, CheckSquare, Plus, Trash2, Sparkles, RefreshCw, UserCheck } from 'lucide-react';
+import { COLUMNS, PRIORITIES, WORK_MODES, DEFAULT_CHECKLIST } from '../lib/constants';
 import { generateCustomChecklist } from '../services/aiService';
 
 const EMPTY = {
   company: '',
   role: '',
   priority: 'medium',
+  workMode: 'remote',
+  skills: [],
+  referral: '',
   linkedinUrl: '',
   resumeUsed: '',
   dateApplied: new Date().toISOString().slice(0, 10),
@@ -23,6 +26,7 @@ export default function JobModal({ job, defaultStatus, resumeNames, onSave, onCl
   const [saving, setSaving] = useState(false);
   const [generatingChecklist, setGeneratingChecklist] = useState(false);
   const [resumeInput, setResumeInput] = useState('');
+  const [skillsInput, setSkillsInput] = useState('');
   const [newChecklistText, setNewChecklistText] = useState('');
 
   useEffect(() => {
@@ -30,14 +34,23 @@ export default function JobModal({ job, defaultStatus, resumeNames, onSave, onCl
       setForm({
         ...EMPTY,
         priority: 'medium',
+        workMode: 'remote',
         checklist: job.checklist || DEFAULT_CHECKLIST,
         ...job,
       });
       setResumeInput(job.resumeUsed || '');
+      setSkillsInput(Array.isArray(job.skills) ? job.skills.join(', ') : '');
     } else {
       const s = defaultStatus || 'wishlist';
-      setForm({ ...EMPTY, status: s, priority: 'medium', checklist: DEFAULT_CHECKLIST });
+      setForm({
+        ...EMPTY,
+        status: s,
+        priority: 'medium',
+        workMode: 'remote',
+        checklist: DEFAULT_CHECKLIST,
+      });
       setResumeInput('');
+      setSkillsInput('');
     }
     setErrors({});
   }, [job, defaultStatus]);
@@ -80,52 +93,51 @@ export default function JobModal({ job, defaultStatus, resumeNames, onSave, onCl
 
   const addChecklistItem = () => {
     if (!newChecklistText.trim()) return;
-    setForm((f) => {
-      const list = f.checklist || DEFAULT_CHECKLIST;
-      return {
-        ...f,
-        checklist: [
-          ...list,
-          { id: `custom_${Date.now()}`, text: newChecklistText.trim(), done: false },
-        ],
-      };
-    });
+    const newItem = {
+      id: `task_${Date.now()}`,
+      text: newChecklistText.trim(),
+      done: false,
+    };
+    set('checklist', [...(form.checklist || DEFAULT_CHECKLIST), newItem]);
     setNewChecklistText('');
   };
 
   const removeChecklistItem = (idOrIndex) => {
-    setForm((f) => {
-      const list = f.checklist || DEFAULT_CHECKLIST;
-      return {
-        ...f,
-        checklist: list.filter((item, idx) => item.id !== idOrIndex && idx !== idOrIndex),
-      };
-    });
+    const list = form.checklist || DEFAULT_CHECKLIST;
+    const updated = list.filter((item, idx) => item.id !== idOrIndex && idx !== idOrIndex);
+    set('checklist', updated);
   };
 
   const validate = () => {
-    const e = {};
-    if (!form.company.trim()) e.company = 'Company name is required.';
-    if (!form.role.trim()) e.role = 'Job title / role is required.';
-    if (form.linkedinUrl && !/^https?:\/\/.+/.test(form.linkedinUrl.trim())) {
-      e.linkedinUrl = 'Must be a valid URL starting with http(s)://';
+    const errs = {};
+    if (!form.company.trim()) errs.company = 'Company is required';
+    if (!form.role.trim()) errs.role = 'Role is required';
+    if (form.linkedinUrl && !/^https?:\/\//i.test(form.linkedinUrl)) {
+      errs.linkedinUrl = 'Please enter a valid URL (e.g. https://...)';
     }
-    setErrors(e);
-    return Object.keys(e).length === 0;
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
+
     setSaving(true);
-    const payload = {
-      ...form,
-      company: form.company.trim(),
-      role: form.role.trim(),
-      resumeUsed: resumeInput.trim(),
-    };
-    await onSave(payload);
-    setSaving(false);
+    try {
+      const parsedSkills = skillsInput
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
+
+      await onSave({
+        ...form,
+        resumeUsed: resumeInput.trim(),
+        skills: parsedSkills,
+      });
+    } finally {
+      setSaving(false);
+    }
   };
 
   const inputClass = (field) =>
@@ -216,6 +228,63 @@ export default function JobModal({ job, defaultStatus, resumeNames, onSave, onCl
                   </button>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Work Mode Selector */}
+          <div>
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+              Work Mode
+            </label>
+            <div className="grid grid-cols-3 gap-2">
+              {WORK_MODES.map((m) => {
+                const isSelected = (form.workMode || 'remote') === m.id;
+                return (
+                  <button
+                    key={m.id}
+                    type="button"
+                    onClick={() => set('workMode', m.id)}
+                    className={`py-1.5 px-3 rounded-lg border text-xs font-bold transition-all cursor-pointer ${
+                      isSelected
+                        ? `${m.badge} ring-2 ring-indigo-500/40 scale-102`
+                        : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    {m.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Tech Stack Skills */}
+          <div>
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+              Tech Stack Skills (Comma separated)
+            </label>
+            <input
+              type="text"
+              value={skillsInput}
+              onChange={(e) => setSkillsInput(e.target.value)}
+              placeholder="e.g. React, TypeScript, Playwright, AWS, Python"
+              className={inputClass('skills')}
+            />
+          </div>
+
+          {/* Referral Contact */}
+          <div>
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+              Referred By (Optional)
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                value={form.referral || ''}
+                onChange={(e) => set('referral', e.target.value)}
+                placeholder="e.g. David Chen (Senior Eng Manager)"
+                className={`${inputClass('referral')} pl-8`}
+              />
+              <UserCheck size={14} className="absolute left-2.5 top-2.5 text-slate-400" />
             </div>
           </div>
 

@@ -6,16 +6,17 @@ import {
   Trash2,
   ExternalLink,
   Clock,
-  FileText,
   GripVertical,
   ChevronDown,
   CheckCircle2,
   Target,
   Sparkles,
+  UserCheck,
 } from 'lucide-react';
 import {
   getColumn,
   getPriority,
+  getWorkMode,
   daysSince,
   getCompanyAvatarInfo,
   COLUMNS,
@@ -33,15 +34,11 @@ export default function JobCard({
 }) {
   const col = getColumn(job.status);
   const priority = getPriority(job.priority);
+  const workMode = getWorkMode(job.workMode);
   const days = daysSince(job.dateApplied);
   const avatar = getCompanyAvatarInfo(job.company);
 
   const [checklistOpen, setChecklistOpen] = useState(false);
-
-  const checklist = job.checklist || DEFAULT_CHECKLIST;
-  const completedTasks = checklist.filter((i) => i.done).length;
-  const totalTasks = checklist.length;
-  const progressPercent = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
 
   const {
     attributes,
@@ -50,7 +47,10 @@ export default function JobCard({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: job.id, data: { status: job.status } });
+  } = useSortable({
+    id: job.id,
+    data: { type: 'job', job },
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -58,20 +58,19 @@ export default function JobCard({
     opacity: isDragging ? 0.35 : 1,
   };
 
+  const checklist = job.checklist || DEFAULT_CHECKLIST;
+  const totalTasks = checklist.length;
+  const completedTasks = checklist.filter((t) => t.done).length;
+  const progressPercent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+  // Extract skills
+  const skillsList = Array.isArray(job.skills) && job.skills.length > 0
+    ? job.skills
+    : [];
+
   const handleCardClick = (e) => {
-    // If clicking on interactive elements, don't trigger modal edit
-    if (
-      e.target.closest('button') ||
-      e.target.closest('a') ||
-      e.target.closest('select') ||
-      e.target.closest('input') ||
-      e.target.closest('[data-no-card-click]')
-    ) {
-      return;
-    }
-    if (onEdit) {
-      onEdit(job);
-    }
+    if (e.target.closest('[data-no-card-click="true"]')) return;
+    onEdit(job);
   };
 
   return (
@@ -79,7 +78,7 @@ export default function JobCard({
       ref={setNodeRef}
       style={style}
       onClick={handleCardClick}
-      className={`group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-xs hover:shadow-lg hover:border-indigo-300/80 dark:hover:border-indigo-600/60 hover:-translate-y-0.5 active:scale-[0.99] transition-all duration-200 cursor-pointer select-none ${
+      className={`group relative rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 shadow-xs hover:shadow-lg hover:border-indigo-300/80 dark:hover:border-indigo-600/60 hover:-translate-y-0.5 active:scale-[0.99] transition-all duration-200 cursor-pointer select-none ${
         isDragging ? 'scale-105 shadow-2xl ring-2 ring-indigo-500/50 z-50 cursor-grabbing' : ''
       }`}
       title="Click to view/edit application"
@@ -96,7 +95,7 @@ export default function JobCard({
         {...listeners}
         data-no-card-click="true"
         aria-label="Drag to rearrange card"
-        className="absolute top-2.5 right-2.5 p-1 rounded-md cursor-grab active:cursor-grabbing text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all"
+        className="absolute top-2.5 right-2.5 p-1 rounded-md cursor-grab active:cursor-grabbing text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
         title="Drag to rearrange"
       >
         <GripVertical size={14} />
@@ -104,7 +103,7 @@ export default function JobCard({
 
       <div className="pl-4 pr-3 pt-3 pb-3">
         {/* Header: Company Avatar + Name & Priority */}
-        <div className="flex items-start gap-2.5 mb-2 pr-6">
+        <div className="flex items-start gap-2.5 mb-1.5 pr-6 overflow-hidden">
           {/* Company Avatar */}
           <div
             className={`w-7 h-7 rounded-lg bg-gradient-to-br ${avatar.gradient} flex items-center justify-center text-white font-bold text-[11px] shadow-xs flex-shrink-0`}
@@ -113,15 +112,18 @@ export default function JobCard({
             {avatar.initials}
           </div>
 
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <h3 className="font-bold text-sm text-slate-900 dark:text-white leading-tight truncate">
+          <div className="w-0 min-w-0 flex-1 overflow-hidden">
+            <div className="flex items-center gap-1.5 min-w-0 overflow-hidden">
+              <span
+                className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate block flex-1 overflow-hidden"
+                title={job.company}
+              >
                 {job.company}
-              </h3>
+              </span>
               {/* Priority Pill */}
               {job.priority && (
                 <span
-                  className={`inline-flex items-center gap-0.5 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${priority.badge}`}
+                  className={`inline-flex items-center gap-0.5 text-[9px] font-bold px-1.5 py-0.2 rounded-full border flex-shrink-0 ${priority.badge}`}
                   title={`Priority: ${priority.label}`}
                 >
                   <span>{priority.icon}</span>
@@ -129,32 +131,79 @@ export default function JobCard({
                 </span>
               )}
             </div>
-            <p className="text-xs text-slate-700 dark:text-slate-200 mt-0.5 truncate font-semibold">
-              {job.role}
-            </p>
+
+            {/* Role Title + External Link */}
+            <div className="flex items-center gap-1 mt-0.5 min-w-0 overflow-hidden">
+              <h3
+                className="font-bold text-sm text-slate-900 dark:text-white leading-tight truncate flex-1 overflow-hidden"
+                title={job.role}
+              >
+                {job.role}
+              </h3>
+              {job.linkedinUrl && (
+                <a
+                  href={job.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-no-card-click="true"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex-shrink-0 p-0.5"
+                  title="Open job posting link"
+                >
+                  <ExternalLink size={11} />
+                </a>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Tags & Meta Row */}
+        {/* Tech Stack Skill Badges (Matching reference UI) */}
+        {skillsList.length > 0 && (
+          <div className="flex flex-wrap items-center gap-1 my-2">
+            {skillsList.slice(0, 3).map((skill, idx) => (
+              <span
+                key={idx}
+                className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/80"
+              >
+                {skill}
+              </span>
+            ))}
+            {skillsList.length > 3 && (
+              <span className="text-[9px] font-bold px-1 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/60">
+                +{skillsList.length - 3}
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* Work Mode & Compensation Row */}
         <div className="flex flex-wrap items-center gap-1.5 mb-2">
-          {job.resumeUsed && (
+          {workMode && (
             <span
-              className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-750 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-600 truncate max-w-[120px]"
-              title={`Resume: ${job.resumeUsed}`}
+              className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${workMode.badge}`}
             >
-              <FileText size={10} />
-              <span className="truncate">{job.resumeUsed}</span>
+              {workMode.label}
             </span>
           )}
 
           {job.salaryRange && (
-            <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-800">
-              {job.salaryRange}
+            <span className="text-[11px] font-extrabold px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+              $ {job.salaryRange.replace(/^\$\s*/, '')}
+            </span>
+          )}
+
+          {job.referral && (
+            <span
+              className="inline-flex items-center gap-1 text-[10px] font-semibold px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+              title={`Referred by: ${job.referral}`}
+            >
+              <UserCheck size={10} className="text-indigo-500" />
+              <span className="truncate max-w-[90px]">Ref: {job.referral}</span>
             </span>
           )}
 
           {days !== null && (
-            <span className="inline-flex items-center gap-1 text-[11px] text-slate-600 dark:text-slate-300 font-semibold ml-auto">
+            <span className="inline-flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400 font-medium ml-auto">
               <Clock size={10} />
               {days === 0 ? 'Today' : `${days}d ago`}
             </span>
@@ -253,9 +302,9 @@ export default function JobCard({
         )}
 
         {/* Footer Actions Row */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700/70 relative">
-          {/* Quick Stage Switcher (Unclipped native select styled as pill) */}
-          <div className="relative inline-flex items-center" data-no-card-click="true">
+        <div className="flex items-center justify-between gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-800 relative">
+          {/* Quick Stage Switcher (Compact pill) */}
+          <div className="relative inline-flex items-center min-w-0 max-w-[110px]" data-no-card-click="true">
             <select
               value={job.status}
               aria-label={`Change stage for ${job.company}`}
@@ -266,7 +315,7 @@ export default function JobCard({
                   onQuickMove(job.id, e.target.value);
                 }
               }}
-              className={`appearance-none cursor-pointer text-xs font-bold pl-2.5 pr-6 py-1 rounded-lg transition-all ${col.badge} hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+              className={`w-full appearance-none cursor-pointer text-[10px] font-bold pl-2 pr-5 py-0.5 rounded-lg transition-all ${col.badge} truncate hover:brightness-95 focus:outline-none focus:ring-1 focus:ring-indigo-500`}
               title="Click to quickly move stage"
             >
               {COLUMNS.map((c) => (
@@ -280,12 +329,13 @@ export default function JobCard({
               ))}
             </select>
             <ChevronDown
-              size={12}
+              size={10}
               className="absolute right-1.5 pointer-events-none text-current opacity-80"
             />
           </div>
 
-          <div className="flex items-center gap-1" data-no-card-click="true">
+          {/* Action Buttons Group */}
+          <div className="flex items-center gap-0.5 flex-shrink-0" data-no-card-click="true">
             {/* ATS Score Button */}
             <button
               type="button"
@@ -294,10 +344,10 @@ export default function JobCard({
                 e.stopPropagation();
                 if (onOpenATS) onOpenATS(job);
               }}
-              className="p-1.5 rounded-lg text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/60 transition-colors cursor-pointer border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800"
+              className="p-1 rounded-md text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/60 transition-colors cursor-pointer border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800"
               title="ATS Keyword Match Score"
             >
-              <Target size={13} />
+              <Target size={12} />
             </button>
 
             {/* AI Outreach Generator Button */}
@@ -308,28 +358,13 @@ export default function JobCard({
                 e.stopPropagation();
                 if (onOpenOutreach) onOpenOutreach(job);
               }}
-              className="p-1.5 rounded-lg text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/60 transition-colors cursor-pointer border border-transparent hover:border-purple-200 dark:hover:border-purple-800"
+              className="p-1 rounded-md text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/60 transition-colors cursor-pointer border border-transparent hover:border-purple-200 dark:hover:border-purple-800"
               title="1-Click AI Cover Letter & Outreach"
             >
-              <Sparkles size={13} />
+              <Sparkles size={12} />
             </button>
 
-            {/* View Job Link */}
-            {job.linkedinUrl && (
-              <a
-                href={job.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Open job posting link for ${job.company}`}
-                onClick={(e) => e.stopPropagation()}
-                className="p-1.5 rounded-lg text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/60 transition-colors cursor-pointer"
-                title="Open Job Posting"
-              >
-                <ExternalLink size={13} />
-              </a>
-            )}
-
-            {/* Edit / Delete Buttons */}
+            {/* Edit Button */}
             <button
               id={`edit-job-${job.id}`}
               type="button"
@@ -338,11 +373,13 @@ export default function JobCard({
                 e.stopPropagation();
                 onEdit(job);
               }}
-              className="p-1.5 rounded-lg text-slate-500 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 transition-colors cursor-pointer"
+              className="p-1 rounded-md text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 transition-colors cursor-pointer"
               title="Edit details"
             >
-              <Pencil size={13} />
+              <Pencil size={12} />
             </button>
+
+            {/* Delete Button */}
             <button
               id={`delete-job-${job.id}`}
               type="button"
@@ -351,10 +388,10 @@ export default function JobCard({
                 e.stopPropagation();
                 onDelete(job);
               }}
-              className="p-1.5 rounded-lg text-slate-500 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/60 transition-colors cursor-pointer"
+              className="p-1 rounded-md text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/60 transition-colors cursor-pointer"
               title="Delete job"
             >
-              <Trash2 size={13} />
+              <Trash2 size={12} />
             </button>
           </div>
         </div>

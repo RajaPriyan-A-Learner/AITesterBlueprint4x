@@ -10,11 +10,13 @@ import {
   ListTodo,
   Target,
   Sparkles,
+  UserCheck,
 } from 'lucide-react';
 import {
   COLUMNS,
   getColumn,
   getPriority,
+  getWorkMode,
   daysSince,
   getCompanyAvatarInfo,
   DEFAULT_CHECKLIST,
@@ -50,9 +52,6 @@ export default function TableView({
       if (sortField === 'dateApplied') {
         aVal = new Date(aVal || 0).getTime();
         bVal = new Date(bVal || 0).getTime();
-      } else if (typeof aVal === 'string') {
-        aVal = aVal.toLowerCase();
-        bVal = bVal.toLowerCase();
       }
 
       if (aVal < bVal) return sortDirection === 'asc' ? -1 : 1;
@@ -61,14 +60,21 @@ export default function TableView({
     });
   }, [jobs, sortField, sortDirection]);
 
+  if (jobs.length === 0) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center p-12 text-slate-400">
+        <p className="text-sm font-medium">No job applications match your filters.</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-screen-2xl mx-auto w-full px-4 sm:px-6 py-2 overflow-hidden flex-1 flex flex-col">
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800 shadow-sm overflow-hidden flex-1 flex flex-col">
-        {/* Table scroll container */}
-        <div className="overflow-x-auto overflow-y-auto flex-1 max-h-[calc(100vh-210px)]">
-          <table className="w-full text-left border-collapse text-xs">
+    <div className="max-w-screen-2xl mx-auto w-full px-4 sm:px-6 py-4 flex-1">
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 overflow-hidden shadow-xs">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
             {/* Table Header */}
-            <thead className="sticky top-0 z-20 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 uppercase font-semibold text-[10px] tracking-wider select-none">
+            <thead className="bg-slate-50/80 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider text-[10px] border-b border-slate-200 dark:border-slate-700 select-none">
               <tr>
                 <th
                   onClick={() => handleSort('company')}
@@ -108,7 +114,7 @@ export default function TableView({
                   className="py-3 px-4 cursor-pointer hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
                 >
                   <div className="flex items-center gap-1.5">
-                    <span>Salary</span>
+                    <span>Salary & Mode</span>
                     <ArrowUpDown size={11} className="opacity-60" />
                   </div>
                 </th>
@@ -130,12 +136,13 @@ export default function TableView({
               {sortedJobs.map((job) => {
                 const col = getColumn(job.status);
                 const priority = getPriority(job.priority);
+                const workMode = getWorkMode(job.workMode);
                 const days = daysSince(job.dateApplied);
                 const avatar = getCompanyAvatarInfo(job.company);
 
                 const checklist = job.checklist || DEFAULT_CHECKLIST;
-                const completedCount = checklist.filter((item) => item.done).length;
                 const totalCount = checklist.length;
+                const completedCount = checklist.filter((i) => i.done).length;
                 const progressPercent = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
 
                 return (
@@ -146,20 +153,49 @@ export default function TableView({
                   >
                     {/* 1. Company & Role */}
                     <td className="py-3 px-4">
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-start gap-3">
                         {/* Company Avatar */}
                         <div
-                          className={`w-7 h-7 rounded-lg bg-gradient-to-br ${avatar.gradient} flex items-center justify-center text-white font-bold text-[11px] shadow-xs flex-shrink-0 select-none`}
+                          className={`w-7 h-7 rounded-lg bg-gradient-to-br ${avatar.gradient} flex items-center justify-center text-white font-bold text-[11px] shadow-xs flex-shrink-0 select-none mt-0.5`}
                         >
                           {avatar.initials}
                         </div>
                         <div className="min-w-0">
-                          <div className="font-semibold text-slate-900 dark:text-white text-xs truncate max-w-[200px]">
-                            {job.company}
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-slate-900 dark:text-white text-xs truncate max-w-[200px]">
+                              {job.company}
+                            </span>
+                            {job.referral && (
+                              <span
+                                className="inline-flex items-center gap-0.5 text-[9px] font-semibold px-1 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
+                                title={`Referred by: ${job.referral}`}
+                              >
+                                <UserCheck size={9} className="text-indigo-500" />
+                                <span>Ref</span>
+                              </span>
+                            )}
                           </div>
-                          <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate max-w-[200px] font-medium">
+                          <div className="text-[11px] text-slate-600 dark:text-slate-300 truncate max-w-[200px] font-medium">
                             {job.role}
                           </div>
+                          {/* Skills preview */}
+                          {Array.isArray(job.skills) && job.skills.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mt-1">
+                              {job.skills.slice(0, 2).map((s, idx) => (
+                                <span
+                                  key={idx}
+                                  className="text-[9px] font-bold px-1 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700"
+                                >
+                                  {s}
+                                </span>
+                              ))}
+                              {job.skills.length > 2 && (
+                                <span className="text-[9px] text-slate-400">
+                                  +{job.skills.length - 2}
+                                </span>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </td>
@@ -275,15 +311,23 @@ export default function TableView({
                       )}
                     </td>
 
-                    {/* 5. Salary */}
+                    {/* 5. Salary & Mode */}
                     <td className="py-3 px-4">
-                      {job.salaryRange ? (
-                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800/60">
-                          {job.salaryRange}
-                        </span>
-                      ) : (
-                        <span className="text-slate-400 text-[11px]">—</span>
-                      )}
+                      <div className="flex flex-col gap-1 items-start">
+                        {job.salaryRange && (
+                          <span className="text-[11px] font-extrabold px-1.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-800">
+                            $ {job.salaryRange.replace(/^\$\s*/, '')}
+                          </span>
+                        )}
+                        {workMode && (
+                          <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded-md border ${workMode.badge}`}>
+                            {workMode.label}
+                          </span>
+                        )}
+                        {!job.salaryRange && !workMode && (
+                          <span className="text-slate-400 text-[11px]">—</span>
+                        )}
+                      </div>
                     </td>
 
                     {/* 6. Date Applied */}

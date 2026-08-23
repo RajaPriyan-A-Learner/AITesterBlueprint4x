@@ -15,6 +15,12 @@ export const PRIORITIES = [
   { id: 'low',    label: 'Low',    icon: '☕', badge: 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700', dot: 'bg-slate-400' },
 ];
 
+export const WORK_MODES = [
+  { id: 'remote', label: 'Remote', badge: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800' },
+  { id: 'hybrid', label: 'Hybrid', badge: 'bg-sky-50 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300 border-sky-200 dark:border-sky-800' },
+  { id: 'onsite', label: 'Onsite', badge: 'bg-purple-50 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border-purple-200 dark:border-purple-800' },
+];
+
 export const DEFAULT_CHECKLIST = [
   { id: 'tailor_resume', text: 'Tailor resume & keywords for role', done: false },
   { id: 'submit_app', text: 'Submit application on careers portal', done: false },
@@ -28,7 +34,11 @@ export function getColumn(id) {
 }
 
 export function getPriority(id) {
-  return PRIORITIES.find((p) => p.id === id) || PRIORITIES[1]; // default medium
+  return PRIORITIES.find((p) => p.id === id) || PRIORITIES[1];
+}
+
+export function getWorkMode(id) {
+  return WORK_MODES.find((m) => m.id === (id || '').toLowerCase()) || null;
 }
 
 export function daysSince(dateStr) {
@@ -71,11 +81,43 @@ export function getCompanyAvatarInfo(company = '') {
 }
 
 /**
+ * Parse salary string into estimated numeric USD value
+ */
+export function parseSalaryEstimate(salaryStr = '') {
+  if (!salaryStr) return 0;
+  const str = salaryStr.toLowerCase().replace(/,/g, '');
+
+  // Format: $180k - $240k or 180k
+  const kMatches = str.match(/(\d+)\s*k/g);
+  if (kMatches && kMatches.length > 0) {
+    const nums = kMatches.map((m) => parseInt(m, 10) * 1000);
+    const avg = nums.reduce((a, b) => a + b, 0) / nums.length;
+    return avg;
+  }
+
+  // Format: ₹25-35 LPA
+  const lpaMatches = str.match(/(\d+)\s*(?:lpa|lac|lakh)/g);
+  if (lpaMatches && lpaMatches.length > 0) {
+    const nums = lpaMatches.map((m) => parseInt(m, 10) * 1200); // approximate conversion
+    const avg = nums.reduce((a, b) => a + b, 0) / nums.length;
+    return avg;
+  }
+
+  // Direct numbers
+  const directNums = str.match(/\d{4,7}/g);
+  if (directNums && directNums.length > 0) {
+    const nums = directNums.map((n) => parseInt(n, 10));
+    return nums.reduce((a, b) => a + b, 0) / nums.length;
+  }
+
+  return 0;
+}
+
+/**
  * Confetti cannon trigger for Offer celebrations
  */
 export function triggerOfferConfetti() {
   try {
-    // Left explosion
     confetti({
       particleCount: 60,
       angle: 60,
@@ -83,7 +125,6 @@ export function triggerOfferConfetti() {
       origin: { x: 0.1, y: 0.8 },
       colors: ['#10b981', '#6366f1', '#f59e0b', '#ec4899', '#3b82f6'],
     });
-    // Right explosion
     confetti({
       particleCount: 60,
       angle: 120,
@@ -92,7 +133,6 @@ export function triggerOfferConfetti() {
       colors: ['#10b981', '#6366f1', '#f59e0b', '#ec4899', '#3b82f6'],
     });
   } catch {
-    // Ignore in non-browser environments
+    // ignore
   }
 }
-
