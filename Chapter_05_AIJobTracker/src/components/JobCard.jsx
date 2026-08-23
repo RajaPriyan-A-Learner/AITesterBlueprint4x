@@ -1,11 +1,47 @@
+import { useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Pencil, Trash2, ExternalLink, Clock, FileText, GripVertical } from 'lucide-react';
-import { getColumn, daysSince } from '../lib/constants';
+import {
+  Pencil,
+  Trash2,
+  ExternalLink,
+  Clock,
+  FileText,
+  GripVertical,
+  ChevronDown,
+  CheckCircle2,
+  Target,
+  Sparkles,
+} from 'lucide-react';
+import {
+  getColumn,
+  getPriority,
+  daysSince,
+  getCompanyAvatarInfo,
+  COLUMNS,
+  DEFAULT_CHECKLIST,
+} from '../lib/constants';
 
-export default function JobCard({ job, onEdit, onDelete }) {
+export default function JobCard({
+  job,
+  onEdit,
+  onDelete,
+  onQuickMove,
+  onToggleChecklist,
+  onOpenATS,
+  onOpenOutreach,
+}) {
   const col = getColumn(job.status);
+  const priority = getPriority(job.priority);
   const days = daysSince(job.dateApplied);
+  const avatar = getCompanyAvatarInfo(job.company);
+
+  const [checklistOpen, setChecklistOpen] = useState(false);
+
+  const checklist = job.checklist || DEFAULT_CHECKLIST;
+  const completedTasks = checklist.filter((i) => i.done).length;
+  const totalTasks = checklist.length;
+  const progressPercent = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
 
   const {
     attributes,
@@ -19,18 +55,38 @@ export default function JobCard({ job, onEdit, onDelete }) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.4 : 1,
+    opacity: isDragging ? 0.35 : 1,
+  };
+
+  const handleCardClick = (e) => {
+    // If clicking on interactive elements, don't trigger modal edit
+    if (
+      e.target.closest('button') ||
+      e.target.closest('a') ||
+      e.target.closest('select') ||
+      e.target.closest('input') ||
+      e.target.closest('[data-no-card-click]')
+    ) {
+      return;
+    }
+    if (onEdit) {
+      onEdit(job);
+    }
   };
 
   return (
     <div
       ref={setNodeRef}
       style={style}
-      className={`group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-all duration-150 ${isDragging ? 'scale-105 shadow-xl z-50' : ''}`}
+      onClick={handleCardClick}
+      className={`group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-xs hover:shadow-lg hover:border-indigo-300/80 dark:hover:border-indigo-600/60 hover:-translate-y-0.5 active:scale-[0.99] transition-all duration-200 cursor-pointer select-none ${
+        isDragging ? 'scale-105 shadow-2xl ring-2 ring-indigo-500/50 z-50 cursor-grabbing' : ''
+      }`}
+      title="Click to view/edit application"
     >
-      {/* Status accent left border */}
+      {/* Left status accent line */}
       <div
-        className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full"
+        className="absolute left-0 top-2.5 bottom-2.5 w-1 rounded-r-full"
         style={{ backgroundColor: col.color }}
       />
 
@@ -38,82 +94,267 @@ export default function JobCard({ job, onEdit, onDelete }) {
       <div
         {...attributes}
         {...listeners}
-        className="absolute top-3 right-3 cursor-grab active:cursor-grabbing text-slate-300 dark:text-slate-600 hover:text-slate-500 dark:hover:text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity"
-        title="Drag to move"
+        data-no-card-click="true"
+        aria-label="Drag to rearrange card"
+        className="absolute top-2.5 right-2.5 p-1 rounded-md cursor-grab active:cursor-grabbing text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all"
+        title="Drag to rearrange"
       >
         <GripVertical size={14} />
       </div>
 
-      <div className="pl-4 pr-8 pt-3 pb-3">
-        {/* Company + Role */}
-        <div className="mb-2 pr-2">
-          <h3 className="font-semibold text-sm text-slate-900 dark:text-white leading-tight truncate">
-            {job.company}
-          </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate">{job.role}</p>
+      <div className="pl-4 pr-3 pt-3 pb-3">
+        {/* Header: Company Avatar + Name & Priority */}
+        <div className="flex items-start gap-2.5 mb-2 pr-6">
+          {/* Company Avatar */}
+          <div
+            className={`w-7 h-7 rounded-lg bg-gradient-to-br ${avatar.gradient} flex items-center justify-center text-white font-bold text-[11px] shadow-xs flex-shrink-0`}
+            title={job.company}
+          >
+            {avatar.initials}
+          </div>
+
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white leading-tight truncate">
+                {job.company}
+              </h3>
+              {/* Priority Pill */}
+              {job.priority && (
+                <span
+                  className={`inline-flex items-center gap-0.5 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${priority.badge}`}
+                  title={`Priority: ${priority.label}`}
+                >
+                  <span>{priority.icon}</span>
+                  <span>{priority.label}</span>
+                </span>
+              )}
+            </div>
+            <p className="text-xs text-slate-700 dark:text-slate-200 mt-0.5 truncate font-semibold">
+              {job.role}
+            </p>
+          </div>
         </div>
 
-        {/* Tags row */}
-        <div className="flex flex-wrap gap-1.5 mb-2.5">
+        {/* Tags & Meta Row */}
+        <div className="flex flex-wrap items-center gap-1.5 mb-2">
           {job.resumeUsed && (
-            <span className="inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
-              <FileText size={9} />
-              {job.resumeUsed}
+            <span
+              className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-750 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-600 truncate max-w-[120px]"
+              title={`Resume: ${job.resumeUsed}`}
+            >
+              <FileText size={10} />
+              <span className="truncate">{job.resumeUsed}</span>
             </span>
           )}
+
           {job.salaryRange && (
-            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400">
+            <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-800">
               {job.salaryRange}
             </span>
           )}
+
           {days !== null && (
-            <span className="inline-flex items-center gap-0.5 text-[10px] text-slate-400 dark:text-slate-500 ml-auto">
-              <Clock size={9} />
+            <span className="inline-flex items-center gap-1 text-[11px] text-slate-600 dark:text-slate-300 font-semibold ml-auto">
+              <Clock size={10} />
               {days === 0 ? 'Today' : `${days}d ago`}
             </span>
           )}
         </div>
 
-        {/* Notes preview */}
+        {/* Checklist Accordion Trigger */}
+        <div className="mb-2" data-no-card-click="true">
+          <button
+            type="button"
+            aria-label="Toggle task checklist"
+            onClick={(e) => {
+              e.stopPropagation();
+              setChecklistOpen(!checklistOpen);
+            }}
+            className={`w-full inline-flex items-center justify-between px-2.5 py-1 rounded-lg transition-all text-xs font-semibold cursor-pointer border ${
+              checklistOpen
+                ? 'bg-indigo-50 dark:bg-indigo-950/50 border-indigo-200 dark:border-indigo-800 text-indigo-800 dark:text-indigo-200'
+                : 'bg-slate-100 dark:bg-slate-750 hover:bg-slate-200 dark:hover:bg-slate-700 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100'
+            }`}
+            title="Click to view/toggle checklist tasks"
+          >
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2
+                size={13}
+                className={completedTasks === totalTasks ? 'text-emerald-500' : 'text-slate-400 dark:text-slate-400'}
+              />
+              <span>
+                {completedTasks}/{totalTasks} tasks
+              </span>
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <div className="w-12 h-1.5 rounded-full bg-slate-200 dark:bg-slate-600 overflow-hidden">
+                <div
+                  className="h-full bg-indigo-600 dark:bg-indigo-400 rounded-full transition-all"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+              <ChevronDown
+                size={12}
+                className={`transition-transform duration-200 text-slate-500 ${
+                  checklistOpen ? 'rotate-180 text-indigo-600 dark:text-indigo-400' : ''
+                }`}
+              />
+            </div>
+          </button>
+
+          {/* Inline Expandable Checklist (Unclipped) */}
+          {checklistOpen && (
+            <div className="mt-1.5 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 space-y-1.5 animate-in fade-in duration-150">
+              <div className="text-[11px] font-bold text-slate-800 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800 pb-1 flex justify-between">
+                <span>Application Tasks</span>
+                <span className="text-slate-500 dark:text-slate-400 font-semibold">
+                  {completedTasks}/{totalTasks} Done
+                </span>
+              </div>
+              <div className="space-y-1 max-h-48 overflow-y-auto">
+                {checklist.map((item, idx) => (
+                  <label
+                    key={item.id || idx}
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-start gap-2 p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer text-xs text-slate-800 dark:text-slate-100 transition-colors"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={Boolean(item.done)}
+                      onChange={() => {
+                        if (onToggleChecklist) {
+                          onToggleChecklist(job.id, item.id || idx);
+                        }
+                      }}
+                      className="mt-0.5 accent-indigo-600 w-3.5 h-3.5 rounded cursor-pointer flex-shrink-0"
+                    />
+                    <span
+                      className={
+                        item.done
+                          ? 'line-through text-slate-400 dark:text-slate-500 font-normal select-none'
+                          : 'font-medium select-none'
+                      }
+                    >
+                      {item.text}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Notes preview if available */}
         {job.notes && (
-          <p className="text-[11px] text-slate-400 dark:text-slate-500 truncate mb-2">{job.notes}</p>
+          <p className="text-[11px] text-slate-600 dark:text-slate-300 truncate mb-2.5 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 rounded-md border border-slate-200/60 dark:border-slate-700/60">
+            {job.notes}
+          </p>
         )}
 
-        {/* Footer actions */}
-        <div className="flex items-center justify-between pt-1 border-t border-slate-100 dark:border-slate-700/50">
-          {/* LinkedIn link */}
-          {job.linkedinUrl ? (
-            <a
-              href={job.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-[10px] font-medium text-sky-600 dark:text-sky-400 hover:underline"
-              title="Open LinkedIn job"
+        {/* Footer Actions Row */}
+        <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700/70 relative">
+          {/* Quick Stage Switcher (Unclipped native select styled as pill) */}
+          <div className="relative inline-flex items-center" data-no-card-click="true">
+            <select
+              value={job.status}
+              aria-label={`Change stage for ${job.company}`}
+              onClick={(e) => e.stopPropagation()}
+              onChange={(e) => {
+                e.stopPropagation();
+                if (onQuickMove && e.target.value !== job.status) {
+                  onQuickMove(job.id, e.target.value);
+                }
+              }}
+              className={`appearance-none cursor-pointer text-xs font-bold pl-2.5 pr-6 py-1 rounded-lg transition-all ${col.badge} hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+              title="Click to quickly move stage"
             >
-              <ExternalLink size={10} />
-              View Job
-            </a>
-          ) : (
-            <span />
-          )}
+              {COLUMNS.map((c) => (
+                <option
+                  key={c.id}
+                  value={c.id}
+                  className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-semibold py-1"
+                >
+                  {c.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              size={12}
+              className="absolute right-1.5 pointer-events-none text-current opacity-80"
+            />
+          </div>
 
-          {/* Edit / Delete — visible on hover */}
-          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="flex items-center gap-1" data-no-card-click="true">
+            {/* ATS Score Button */}
+            <button
+              type="button"
+              aria-label="View ATS Match Score"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onOpenATS) onOpenATS(job);
+              }}
+              className="p-1.5 rounded-lg text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/60 transition-colors cursor-pointer border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800"
+              title="ATS Keyword Match Score"
+            >
+              <Target size={13} />
+            </button>
+
+            {/* AI Outreach Generator Button */}
+            <button
+              type="button"
+              aria-label="Generate AI Cover Letter and Outreach"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onOpenOutreach) onOpenOutreach(job);
+              }}
+              className="p-1.5 rounded-lg text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/60 transition-colors cursor-pointer border border-transparent hover:border-purple-200 dark:hover:border-purple-800"
+              title="1-Click AI Cover Letter & Outreach"
+            >
+              <Sparkles size={13} />
+            </button>
+
+            {/* View Job Link */}
+            {job.linkedinUrl && (
+              <a
+                href={job.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open job posting link for ${job.company}`}
+                onClick={(e) => e.stopPropagation()}
+                className="p-1.5 rounded-lg text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/60 transition-colors cursor-pointer"
+                title="Open Job Posting"
+              >
+                <ExternalLink size={13} />
+              </a>
+            )}
+
+            {/* Edit / Delete Buttons */}
             <button
               id={`edit-job-${job.id}`}
-              onClick={() => onEdit(job)}
-              className="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-              title="Edit"
+              type="button"
+              aria-label={`Edit ${job.company}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit(job);
+              }}
+              className="p-1.5 rounded-lg text-slate-500 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 transition-colors cursor-pointer"
+              title="Edit details"
             >
-              <Pencil size={12} />
+              <Pencil size={13} />
             </button>
             <button
               id={`delete-job-${job.id}`}
-              onClick={() => onDelete(job)}
-              className="p-1 rounded hover:bg-rose-50 dark:hover:bg-rose-950/30 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
-              title="Delete"
+              type="button"
+              aria-label={`Delete ${job.company}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(job);
+              }}
+              className="p-1.5 rounded-lg text-slate-500 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/60 transition-colors cursor-pointer"
+              title="Delete job"
             >
-              <Trash2 size={12} />
+              <Trash2 size={13} />
             </button>
           </div>
         </div>
@@ -121,3 +362,6 @@ export default function JobCard({ job, onEdit, onDelete }) {
     </div>
   );
 }
+
+
+

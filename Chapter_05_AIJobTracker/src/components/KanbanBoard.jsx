@@ -6,19 +6,20 @@ import {
   useSensors,
   closestCorners,
 } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
 import { useState } from 'react';
-import { COLUMNS } from '../lib/constants';
+import { COLUMNS, triggerOfferConfetti } from '../lib/constants';
 import Column from './Column';
 import JobCard from './JobCard';
 
 export default function KanbanBoard({
   jobs,
   onMoveJob,
-  onUpdateJob,
   onAddCard,
   onEditCard,
   onDeleteCard,
+  onToggleChecklist,
+  onOpenATS,
+  onOpenOutreach,
 }) {
   const [activeJob, setActiveJob] = useState(null);
 
@@ -39,7 +40,6 @@ export default function KanbanBoard({
     if (!draggedJob) return;
 
     // Determine target column
-    // `over.id` can be a column id (string) or a job id (number)
     const targetColumnId = COLUMNS.some((c) => c.id === over.id)
       ? over.id
       : jobs.find((j) => j.id === over.id)?.status;
@@ -47,10 +47,18 @@ export default function KanbanBoard({
     if (!targetColumnId) return;
 
     if (draggedJob.status !== targetColumnId) {
-      // Move to different column
+      if (targetColumnId === 'offer') {
+        triggerOfferConfetti();
+      }
       onMoveJob(draggedJob.id, targetColumnId);
     }
-    // Within-column reordering handled by SortableContext automatically
+  };
+
+  const handleQuickMove = (jobId, newStatus) => {
+    if (newStatus === 'offer') {
+      triggerOfferConfetti();
+    }
+    onMoveJob(jobId, newStatus);
   };
 
   const handleDragCancel = () => setActiveJob(null);
@@ -63,7 +71,7 @@ export default function KanbanBoard({
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
     >
-      <div className="flex gap-4 pb-4 overflow-x-auto px-4 sm:px-6 pt-4 min-h-0">
+      <div className="flex gap-4 pb-4 overflow-x-auto px-4 sm:px-6 pt-2 min-h-0">
         {COLUMNS.map((col) => {
           const colJobs = jobs.filter((j) => j.status === col.id);
           return (
@@ -74,6 +82,10 @@ export default function KanbanBoard({
               onAddCard={onAddCard}
               onEditCard={onEditCard}
               onDeleteCard={onDeleteCard}
+              onQuickMove={handleQuickMove}
+              onToggleChecklist={onToggleChecklist}
+              onOpenATS={onOpenATS}
+              onOpenOutreach={onOpenOutreach}
             />
           );
         })}

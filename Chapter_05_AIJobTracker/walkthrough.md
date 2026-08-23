@@ -1,81 +1,67 @@
-# Job Tracker — Walkthrough
+# Walkthrough: AI Intelligence Suite & Settings Hub
 
-## What Was Built
-
-A fully local-first **Kanban Job Tracker** single-page app running at `http://localhost:5173/`.
-
-## Screenshots
-
-### Empty Board (Initial Load)
-![Empty Kanban board with 6 columns](C:\Users\rajap\.gemini\antigravity-ide\brain\8651421e-4914-46d1-8477-80fa759fd94e\loaded_page_1787430927703.png)
-
-### Board After Adding a Card
-![Applied column showing Google – Senior QA Engineer card](C:\Users\rajap\.gemini\antigravity-ide\brain\8651421e-4914-46d1-8477-80fa759fd94e\job_added_1787430992596.png)
-
-### Demo Recording
-![Browser demo showing card add flow](C:\Users\rajap\.gemini\antigravity-ide\brain\8651421e-4914-46d1-8477-80fa759fd94e\job_tracker_verification_1787430916252.webp)
+Completed the **AI Intelligence Suite** and **AI & Model Settings Hub** for **AIJobTracker** (`Chapter_05_AIJobTracker`).
 
 ---
 
-## File Structure
+## 🌟 Key New Features & Capabilities
 
-```
-Chapter_05_AIJobTracker/
-├── index.html                    # SEO meta tags, title
-├── vite.config.js                # Tailwind v4 Vite plugin
-├── package.json
-└── src/
-    ├── main.jsx                  # React root
-    ├── App.jsx                   # Root component — state, routing of modals
-    ├── index.css                 # Tailwind directives, custom scrollbar
-    ├── lib/
-    │   ├── db.js                 # IndexedDB layer (idb)
-    │   └── constants.js          # Column definitions + daysSince util
-    ├── hooks/
-    │   └── useJobs.js            # All CRUD + export/import state hook
-    └── components/
-        ├── Header.jsx            # Sticky frosted-glass header
-        ├── SearchBar.jsx         # Debounced filter input
-        ├── KanbanBoard.jsx       # DndContext + DragOverlay
-        ├── Column.jsx            # Droppable column + sort toggle
-        ├── JobCard.jsx           # Sortable card with accent border
-        ├── JobModal.jsx          # Add/Edit form modal
-        └── DeleteConfirm.jsx     # Confirmation dialog
-```
+### 1. ⚙️ AI & Model Settings Hub (`SettingsModal.jsx`)
+* **Dual AI Provider Architecture**:
+  - **Local Ollama**:
+    - Configurable Server URL (e.g. `http://localhost:11434`) and Model (e.g. `gemma3:1b`, `llama3.2`, `mistral`, `qwen2.5-coder`).
+    - **Live Connection Tester**: Pings Ollama, measures latency in ms, and lists all installed local models with 1-click selection!
+  - **Cloud Models (Google Gemini & OpenAI)**:
+    - Supports Google Gemini (`gemini-1.5-flash`, `gemini-1.5-pro`) and OpenAI (`gpt-4o`, `gpt-4o-mini`).
+    - API Key input with secure password toggle.
+    - **Live API Key Verification**: Tests key authenticity and returns status badge.
+* **Unified Model Routing**: All AI actions dynamically route through the user's active configured provider (persisted in `localStorage`).
 
 ---
 
-## Features Verified ✅
-
-| Feature | Status |
-|---|---|
-| Page loads without JS errors | ✅ |
-| All 6 Kanban columns visible | ✅ |
-| Add Job modal opens and validates | ✅ |
-| Card created and persisted in IndexedDB | ✅ |
-| Card appears in correct column with count badge | ✅ |
-| Dark mode toggle (persists in localStorage) | ✅ |
-| Export JSON button | ✅ |
-| Import JSON button | ✅ |
-| Search/filter bar | ✅ |
-| Drag-and-drop between columns | ✅ |
-| Sort within column (newest/oldest) | ✅ |
-| Edit card via hover → pencil icon | ✅ |
-| Delete with confirmation dialog | ✅ |
+### 2. 🪄 1-Click AI Custom Task Generator (`generateCustomChecklist`)
+* **Role-Specific Tailoring**:
+  - In `JobModal`, clicking **"✨ AI Generate Tasks"** prompts the active LLM with the job's role, company, and notes.
+  - Automatically generates 5 personalized, high-impact preparation steps (e.g., *"Build Playwright Python regression framework demo"*, *"Research Razorpay API documentation & payment lifecycle"*).
+* **Smart Heuristic Fallback**: Zero-latency offline generation if no model connection is present.
 
 ---
 
-## How to Use
+### 3. 📄 Job Description Parser (`JDParserModal.jsx`)
+* Extracts structured Company, Role, Salary, and Tech Stack keywords from raw job posting text.
 
-```bash
-cd Chapter_05_AIJobTracker
-npm run dev          # Start dev server at localhost:5173
-npm run build        # Production build
-```
+---
 
-> [!TIP]
-> To **back up your data**: click **Export** in the header → saves `job-tracker-backup-YYYY-MM-DD.json`
-> To **restore data**: click **Import** → pick the JSON file
+### 4. 🎯 Real-Time ATS Keyword Match Score (`ATSScoreModal.jsx`)
+* Computes $0 - 100\%$ ATS alignment with matched (🟢) and missing (🔴) keywords plus resume recommendations.
 
-> [!NOTE]
-> All data is stored in your browser's IndexedDB under the key `job-tracker-db`. Clearing browser data will erase jobs — use Export to back up regularly.
+---
+
+### 5. ✍️ 1-Click AI Outreach Studio (`AIOutreachModal.jsx`)
+* Generates Tailored Cover Letters, LinkedIn Connection Notes (< 300 chars), and Hiring Manager Cold Emails with multi-tone toggles.
+
+---
+
+## 🧪 Verification & Build Status
+
+| Verification Step | Result |
+| :--- | :--- |
+| **Vite Production Build** | ✅ Succeeded in `362ms` with zero errors (`dist/` created). |
+| **OxLint Verification** | ✅ Clean lint check across all 20 files. |
+| **AI Fallback Resilience** | ✅ Works with local Ollama or client-side NLP engine when offline. |
+
+---
+
+## 📁 Modified & Created Files
+
+* [aiService.js](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/services/aiService.js) `[NEW]`
+* [JDParserModal.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/components/JDParserModal.jsx) `[NEW]`
+* [ATSScoreModal.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/components/ATSScoreModal.jsx) `[NEW]`
+* [AIOutreachModal.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/components/AIOutreachModal.jsx) `[NEW]`
+* [JobCard.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/components/JobCard.jsx) `[MODIFY]`
+* [TableView.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/components/TableView.jsx) `[MODIFY]`
+* [Header.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/components/Header.jsx) `[MODIFY]`
+* [CommandPalette.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/components/CommandPalette.jsx) `[MODIFY]`
+* [Column.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/components/Column.jsx) `[MODIFY]`
+* [KanbanBoard.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/components/KanbanBoard.jsx) `[MODIFY]`
+* [App.jsx](file:///c:/Users/rajap/OneDrive/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3/LEARNINGAITESTER4X/Chapter_05_AIJobTracker/src/App.jsx) `[MODIFY]`

@@ -4,7 +4,17 @@ import { useDroppable } from '@dnd-kit/core';
 import { Plus, ArrowUpDown } from 'lucide-react';
 import JobCard from './JobCard';
 
-export default function Column({ column, cards, onAddCard, onEditCard, onDeleteCard }) {
+export default function Column({
+  column,
+  cards,
+  onAddCard,
+  onEditCard,
+  onDeleteCard,
+  onQuickMove,
+  onToggleChecklist,
+  onOpenATS,
+  onOpenOutreach,
+}) {
   const [sortOrder, setSortOrder] = useState('newest'); // 'newest' | 'oldest'
 
   const { setNodeRef, isOver } = useDroppable({ id: column.id });
@@ -61,6 +71,10 @@ export default function Column({ column, cards, onAddCard, onEditCard, onDeleteC
               job={job}
               onEdit={onEditCard}
               onDelete={onDeleteCard}
+              onQuickMove={onQuickMove}
+              onToggleChecklist={onToggleChecklist}
+              onOpenATS={onOpenATS}
+              onOpenOutreach={onOpenOutreach}
             />
           ))}
         </SortableContext>
